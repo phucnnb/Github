@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.DangNhap.MainActivity"
+    tools:context=".View.DangKi.DangKi"
     android:orientation="vertical"
     android:gravity="center">
 
     <EditText
-        android:id="@+id/editDangNhap"
+        android:id="@+id/editDangKi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -20,13 +20,24 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/editMKhau"
+        android:id="@+id/editMKhauDangKi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
         android:hint="Mật Khẩu"
+        android:textColor="#000"
+        android:textColorLink="#000"
+        android:textSize="16sp" />
+    <EditText
+        android:id="@+id/editMKhauDangKiAgain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:hint="Mật Khẩu Xác Nhận"
         android:textColor="#000"
         android:textColorLink="#000"
         android:textSize="16sp" />
@@ -38,19 +49,22 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp">
         <Button
-            android:id="@+id/btnDangNhap"
+            android:id="@+id/btnDangKiTaiKhoan"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="left"
-            android:text="Đăng Nhập" />
+            android:text="Đăng Kí" />
 
         <Button
-            android:id="@+id/btnDangKi"
+            android:id="@+id/btnClear"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Đăng Kí" />
+            android:text="Làm Lại" />
     </LinearLayout>
+
+
+
 
 </LinearLayout>

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MVPRetrofit</string>
+    <string name="dang_nhap_that_bai">Sai tài khoản hoặc mật khẩu.</string>
+    <string name="tai_khoan_da_co">Tài Khoản Đã Được Đăng Kí Trước Đây.</string>
+    <string name="mat_khau_xac_nhan_sai">Mật Khẩu Xác Nhận Không Trùng Khớp.</string>
+    <string name="dang_ki_thanh_cong">Bạn đã đăng kí thành công! \n Chào mừng bạn đã tham gia với chúng tôi.</string>
+    <string name="dang_ki_khong_thanh_cong">Đăng kí không thành công.</string>
 </resources>
