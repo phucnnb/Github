@@ -58,16 +58,18 @@ public class PresenterLogicXuLyDangKi implements PresenterImpXuLyDangKi{
                 @Override
                 public void onResponse(Call<CheckKetQua> call, Response<CheckKetQua> response) {
                     CheckKetQua checkKetQua = new CheckKetQua();
-                    if(response != null){
-                        checkKetQua = response.body();
-                        if(checkKetQua.getKetqua().equals("1")){
-                            thongbao[0] = R.string.dang_ki_thanh_cong;
-                            viewXuLyDangKi.DangKiTaiKhoan(thongbao[0]);
-                            Intent i = new Intent(dangKi, MainActivity.class);
-                            dangKi.startActivity(i);
-                            dangKi.finish();
-                        }else{
-                            thongbao[0] = R.string.dang_ki_khong_thanh_cong;
+                    if(viewXuLyDangKi != null){
+                        if(response != null){
+                            checkKetQua = response.body();
+                            if(checkKetQua.getKetqua().equals("1")){
+                                thongbao[0] = R.string.dang_ki_thanh_cong;
+                                viewXuLyDangKi.DangKiTaiKhoan(thongbao[0]);
+                                Intent i = new Intent(dangKi, MainActivity.class);
+                                dangKi.startActivity(i);
+                                dangKi.finish();
+                            }else{
+                                thongbao[0] = R.string.dang_ki_khong_thanh_cong;
+                            }
                         }
                     }
 
@@ -87,5 +89,10 @@ public class PresenterLogicXuLyDangKi implements PresenterImpXuLyDangKi{
     @Override
     public void Clear() {
         viewXuLyDangKi.Clear();
+    }
+
+    @Override
+    public void ThucHienXoaView() {
+        viewXuLyDangKi = null;
     }
 }

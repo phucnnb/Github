@@ -78,4 +78,10 @@ public class DangKi extends AppCompatActivity implements ViewXuLyDangKi {
         editMKhauDangKiAgain.setText("");
         Toast.makeText(getApplicationContext(),"Làm Lại",Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        xuLyDangKi.ThucHienXoaView();
+    }
 }
