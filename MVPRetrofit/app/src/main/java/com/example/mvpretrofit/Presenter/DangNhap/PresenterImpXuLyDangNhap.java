@@ -5,4 +5,5 @@ import com.example.mvpretrofit.Model.User;
 public interface PresenterImpXuLyDangNhap {
     void ThucHienDangNhap(User user);
     void ThucHienDangKi();
+    void ThucHienXoaView();
 }

@@ -11,7 +11,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PresenterLogicDangNhap implements PresenterImpXuLyDangNhap {
-    ViewXuLyDangNhap viewXuLyDangNhap;
+    ViewXuLyDangNhap viewXuLyDangNhap = null;
 
     public PresenterLogicDangNhap(ViewXuLyDangNhap viewXuLyDangNhap) {
         this.viewXuLyDangNhap = viewXuLyDangNhap;
@@ -27,12 +27,14 @@ public class PresenterLogicDangNhap implements PresenterImpXuLyDangNhap {
             @Override
             public void onResponse(Call<CheckKetQua> call, Response<CheckKetQua> response) {
                 CheckKetQua checkKetQua = new CheckKetQua();
-                if(response != null){
-                    checkKetQua = response.body();
-                    if(checkKetQua.getKetqua().equals("1")){
-                        viewXuLyDangNhap.DangNhapThanhCong(thongbao);
-                    }else {
-                        viewXuLyDangNhap.DangNhapThatBai();
+                if (viewXuLyDangNhap != null){
+                    if(response != null){
+                        checkKetQua = response.body();
+                        if(checkKetQua.getKetqua().equals("1")){
+                            viewXuLyDangNhap.DangNhapThanhCong(thongbao);
+                        }else {
+                            viewXuLyDangNhap.DangNhapThatBai();
+                        }
                     }
                 }
             }
@@ -48,5 +50,10 @@ public class PresenterLogicDangNhap implements PresenterImpXuLyDangNhap {
     @Override
     public void ThucHienDangKi() {
         viewXuLyDangNhap.DangKi();
+    }
+
+    @Override
+    public void ThucHienXoaView() {
+        viewXuLyDangNhap = null;
     }
 }

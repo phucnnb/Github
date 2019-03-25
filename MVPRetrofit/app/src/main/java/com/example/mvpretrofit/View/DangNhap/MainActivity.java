@@ -74,4 +74,10 @@ public class MainActivity extends AppCompatActivity implements ViewXuLyDangNhap 
         Intent intent = new Intent(MainActivity.this, DangKi.class);
         startActivity(intent);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        logicDangNhap.ThucHienXoaView();
+    }
 }
