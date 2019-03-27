@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNext(List<Android> androids) {
+                Log.d("AAA","AAAA" + androids.toString());
                 for(int i= 0; i < androids.size(); i ++ ){
                     listAndroid.add(androids.get(i));
                 }
@@ -48,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
                 adapterAndroid = new AdapterAndroid(MainActivity.this,listAndroid);
                 recycler.setAdapter(adapterAndroid);
 
-                Log.d("AAA","AAAA" + androids.toString());
             }
 
             @Override
             public void onError(Throwable e) {
-
+                Toast.makeText(MainActivity.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("AAA",e.getLocalizedMessage());
             }
 
             @Override
@@ -67,11 +68,6 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(layoutManager);
 
-
-
-
-
-        
         XulyData();
     }
 
@@ -92,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             listAndroid.add(androids.get(i));
         }
 
-       adapterAndroid = new AdapterAndroid(this,listAndroid);
+        adapterAndroid = new AdapterAndroid(this,listAndroid);
         recycler.setAdapter(adapterAndroid);
         Log.d("AAA",listAndroid.get(3).getApi().toString() + " ");
     }
@@ -101,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
     private void handleError(Throwable error) {
 
         Toast.makeText(this, "Error " + error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+
+
+
+
     }
 
     private void handleSuccess() {
