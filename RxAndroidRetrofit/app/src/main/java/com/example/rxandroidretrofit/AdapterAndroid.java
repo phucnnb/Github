@@ -13,13 +13,16 @@ import java.util.List;
 public class AdapterAndroid extends RecyclerView.Adapter<AdapterAndroid.AndroidHolder> {
 
     Context context;
-    List<Android> androids;
+    List<Android> androids = null;
     //TextView tv_name,tv_version,tv_api_level;
 
 
     public AdapterAndroid(Context context, List<Android> androids) {
         this.context = context;
         this.androids = androids;
+    }
+
+    public AdapterAndroid() {
     }
 
 
@@ -44,7 +47,12 @@ public class AdapterAndroid extends RecyclerView.Adapter<AdapterAndroid.AndroidH
 
     @Override
     public int getItemCount() {
-        return androids.size();
+        if(androids == null){
+            return 0;
+        }else {
+            return androids.size();
+        }
+
     }
 
     public class AndroidHolder extends RecyclerView.ViewHolder {

@@ -1,19 +1,18 @@
 package com.example.rxandroidretrofit;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Android {
+    @SerializedName("ver")
+    @Expose
     private String ver;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("api")
+    @Expose
     private String api;
-
-    public Android(String ver, String name, String api) {
-        this.ver = ver;
-        this.name = name;
-        this.api = api;
-    }
-
-    public Android(){
-
-    }
 
     public String getVer() {
         return ver;
