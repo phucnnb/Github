@@ -12,6 +12,8 @@
     android:id="@+id/cvUser"
     android:elevation="4dp"
     app:cardBackgroundColor="#0D000000"
+    android:foreground="?attr/selectableItemBackground"
+    android:stateListAnimator="@drawable/view_cardview"
     app:cardCornerRadius="2dp">
 
     <LinearLayout
