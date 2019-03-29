@@ -20,7 +20,7 @@
     <EditText
         android:id="@+id/editDangNhap"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:hint="Tên Đăng Nhập"
@@ -30,12 +30,12 @@
         android:paddingLeft="16dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:layout_marginTop="108dp"/>
+        android:layout_marginTop="96dp"/>
 
     <EditText
         android:id="@+id/editMKhau"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
@@ -50,24 +50,69 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp">
-        <Button
-            android:id="@+id/btnDangNhap"
-            android:layout_width="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cbSave"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="left"
-            android:text="Đăng Nhập" />
-
-        <Button
-            android:id="@+id/btnDangKi"
-            android:layout_width="100dp"
+            android:text="Lưu Mật Khẩu"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:theme="@style/MyCheckbox"/>
+        <TextView
+            android:id="@+id/txtQuenMatKhau"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
             android:layout_weight="1"
-            android:text="Đăng Kí" />
+            android:gravity="right"
+            android:text="Quên Mật Khẩu?"
+            android:textSize="14sp"/>
     </LinearLayout>
+
+
+
+    <Button
+            android:id="@+id/btnDangNhap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Đăng Nhập"
+            android:background="@drawable/button_effect"
+            android:layout_margin="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Không có tài khoản? Hãy " />
+
+        <TextView
+            android:id="@+id/txtDangKi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đăng Kí"
+            android:textColor="#2657eb" />
+
+    </LinearLayout>
+
+
+
 
 </LinearLayout>

@@ -30,8 +30,8 @@ public class PresenterLogicTrangChu implements PresenterImpXuLyTrangChu {
     CompositeDisposable compositeDisposable;
     AdapterAndroid adapterAndroid;
     AdapterUser adapterUser;
-    List<Android> listAndroid;
-    List<User> listUser;
+    List<Android> listAndroid = null;
+    List<User> listUser = null;
     DisposableObserver<List<Android>> disposableObserverAndroid;
     DisposableObserver<List<User>> disposableObserverUser;
 
@@ -56,7 +56,9 @@ public class PresenterLogicTrangChu implements PresenterImpXuLyTrangChu {
                 }
 
                 adapterUser = new AdapterUser(context,listUser);
-                recycler.setAdapter(adapterAndroid);
+                Log.d("EEE",users.get(3).getTaikhoan());
+                Log.d("EEE",users.get(3).getMatkhau());
+                recycler.setAdapter(adapterUser);
             }
 
             @Override
@@ -147,16 +149,21 @@ public class PresenterLogicTrangChu implements PresenterImpXuLyTrangChu {
     @Override
     public void ThucHienXoaView() {
         viewXuLyTrangChu = null;
-        disposableObserverAndroid.dispose();
-        disposableObserverUser.dispose();
+        if(disposableObserverAndroid != null ){
+            disposableObserverAndroid.dispose();
+        }
+        if(disposableObserverUser != null){
+            disposableObserverUser.dispose();
+        }
     }
 
     @Override
     public void ThucHienClearData() {
-
-
-
+        if (listUser != null) {
+            listUser.clear();
+        }
+        if (listAndroid != null) {
+            listAndroid.clear();
+        }
     }
-
-
 }

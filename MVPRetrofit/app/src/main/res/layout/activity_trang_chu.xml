@@ -35,7 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="10"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/ca">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
@@ -54,7 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="9"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="#FFF">
             <LinearLayout
                 android:id="@+id/layoutPerson"
                 android:layout_width="match_parent"

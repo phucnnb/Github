@@ -6,15 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".View.DangKi.DangKi"
     android:orientation="vertical"
-    android:gravity="center"
     android:background="@drawable/gradient_2">
+
+    <ImageView
+        android:id="@+id/imageDangKi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/avengers"
+        android:layout_marginTop="150dp"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/editDangKi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginTop="56dp"
         android:hint="Tên Đăng Nhập"
         android:textColor="#000"
         android:background="@drawable/view_edittext"
@@ -26,7 +34,7 @@
     <EditText
         android:id="@+id/editMKhauDangKi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
@@ -40,7 +48,7 @@
     <EditText
         android:id="@+id/editMKhauDangKiAgain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
@@ -54,24 +62,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="122dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp">
+        android:orientation="horizontal"
+        android:paddingBottom="16dp">
+
         <Button
             android:id="@+id/btnDangKiTaiKhoan"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@drawable/button_effect"
             android:text="Đăng Kí" />
+
+        <RelativeLayout
+            android:layout_width="16dp"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btnClear"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/button_effect"
             android:text="Làm Lại" />
     </LinearLayout>
 

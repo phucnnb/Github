@@ -1,12 +1,20 @@
 package com.example.mvpretrofit.View.DangNhap;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Image;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mvpretrofit.Model.User;
@@ -15,24 +23,37 @@ import com.example.mvpretrofit.R;
 import com.example.mvpretrofit.View.DangKi.DangKi;
 import com.example.mvpretrofit.View.TrangChu.TrangChu;
 
+import es.dmoral.toasty.Toasty;
+
 public class MainActivity extends AppCompatActivity implements ViewXuLyDangNhap {
 
     private EditText editTenDangNhap, editMatKhau;
-    private Button btnDangNhap,btnDangKi;
+    private TextView txtDangKi;
+    private Button btnDangNhap;
     private PresenterLogicDangNhap logicDangNhap;
+    private CheckBox cbSave;
+    private SharedPreferences share;
+    private ImageView image;
+    private boolean press = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         init();
+        share = getSharedPreferences("sharePre",MODE_PRIVATE);
         logicDangNhap = new PresenterLogicDangNhap(this);
+        kiemtraCheckBox();
         event();
+    }
+
+    private void kiemtraCheckBox() {
+        logicDangNhap.ThucHienCheck(MainActivity.this,cbSave.isChecked());
+
     }
 
     // xử lí sự kiện button
@@ -42,14 +63,21 @@ public class MainActivity extends AppCompatActivity implements ViewXuLyDangNhap 
             public void onClick(View v) {
                 User user = new
                         User(editTenDangNhap.getText().toString(),editMatKhau.getText().toString());
-                logicDangNhap.ThucHienDangNhap(user);
+                logicDangNhap.ThucHienDangNhap(user,cbSave.isChecked());
             }
         });
 
-        btnDangKi.setOnClickListener(new View.OnClickListener() {
+        txtDangKi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logicDangNhap.ThucHienDangKi();
+            }
+        });
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toasty.custom(getApplicationContext(),"AVENGERS ASSEMBLE",R.drawable.avengers,R.color.colorBlack,Toasty.LENGTH_SHORT,true,true).show();
             }
         });
     }
@@ -60,16 +88,20 @@ public class MainActivity extends AppCompatActivity implements ViewXuLyDangNhap 
         editTenDangNhap = findViewById(R.id.editDangNhap);
         editMatKhau = findViewById(R.id.editMKhau);
         btnDangNhap = findViewById(R.id.btnDangNhap);
-        btnDangKi = findViewById(R.id.btnDangKi);
+        txtDangKi = findViewById(R.id.txtDangKi);
+        cbSave = findViewById(R.id.cbSave);
+        image = findViewById(R.id.imageMain);
     }
 
     @Override
     public void DangNhapThanhCong(String thongbao) {
-        Toast.makeText(getApplicationContext(),thongbao,Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MainActivity.this, TrangChu.class);
-        startActivity(intent);
-        finish();
-
+        if(press){
+            Toast.makeText(getApplicationContext(),thongbao,Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, TrangChu.class);
+            startActivity(intent);
+            press = false;
+            finish();
+        }
     }
 
     @Override
@@ -85,8 +117,23 @@ public class MainActivity extends AppCompatActivity implements ViewXuLyDangNhap 
     }
 
     @Override
+    public void Check(Boolean check) {
+        if(check){
+            String sdt = share.getString("SDT","");
+            String matkhau = share.getString("MATKHAU", "");
+            editTenDangNhap.setText(sdt);
+            editMatKhau.setText(matkhau);
+            cbSave.setChecked(true);
+        }else {
+            cbSave.setChecked(false);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         logicDangNhap.ThucHienXoaView();
+        finish();
+        
     }
 }

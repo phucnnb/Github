@@ -28,17 +28,15 @@ public class TrangChu extends AppCompatActivity implements ViewXuLyTrangChu {
         logicTrangChu = new PresenterLogicTrangChu(this,this);
         init();
         event();
-
     }
 
 
-
+    // xử lí sự kiên user và android
     private void event() {
         layoutAndroid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logicTrangChu.ThucHienClearData();
-                Toast.makeText(getApplicationContext(),"Android",Toast.LENGTH_SHORT).show();
                 logicTrangChu.ThucHienLayDuLieuAndroid(recycler);
             }
         });
@@ -47,12 +45,12 @@ public class TrangChu extends AppCompatActivity implements ViewXuLyTrangChu {
             @Override
             public void onClick(View v) {
                 logicTrangChu.ThucHienClearData();
-                Toast.makeText(getApplicationContext(),"User",Toast.LENGTH_SHORT).show();
                 logicTrangChu.ThucHienLayDuLieuUser(recycler);
             }
         });
     }
 
+    // khai báo
     private void init() {
         txtTitle = findViewById(R.id.txtTitle);
         layoutAndroid = findViewById(R.id.layoutAndroid);

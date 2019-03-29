@@ -11,6 +11,7 @@ android:layout_marginRight="16dp"
 android:layout_marginBottom="8dp"
 android:id="@+id/cvAndroid"
 android:elevation="4dp"
+
 app:cardBackgroundColor="#0D000000"
 app:cardCornerRadius="2dp">
 

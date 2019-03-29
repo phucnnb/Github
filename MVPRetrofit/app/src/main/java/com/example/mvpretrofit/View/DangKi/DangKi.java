@@ -7,22 +7,25 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.mvpretrofit.Presenter.DangKi.PresenterLogicXuLyDangKi;
 import com.example.mvpretrofit.R;
 
+import es.dmoral.toasty.Toasty;
+
 public class DangKi extends AppCompatActivity implements ViewXuLyDangKi {
 
     private EditText editDangKi,editMKhauDangKi,editMKhauDangKiAgain;
     private Button btnDangKiTaiKhoan,btnClear;
+    private ImageView imageDangKi;
     private PresenterLogicXuLyDangKi xuLyDangKi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ki);
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -53,6 +56,13 @@ public class DangKi extends AppCompatActivity implements ViewXuLyDangKi {
 
             }
         });
+
+        imageDangKi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toasty.custom(getApplicationContext(),"AVENGERS ASSEMBLE",R.drawable.avengers,R.color.colorBlack,Toasty.LENGTH_SHORT,true,true).show();
+            }
+        });
     }
 
 
@@ -64,6 +74,7 @@ public class DangKi extends AppCompatActivity implements ViewXuLyDangKi {
         editMKhauDangKiAgain = findViewById(R.id.editMKhauDangKiAgain);
         btnDangKiTaiKhoan = findViewById(R.id.btnDangKiTaiKhoan);
         btnClear = findViewById(R.id.btnClear);
+        imageDangKi = findViewById(R.id.imageDangKi);
     }
 
 
@@ -80,7 +91,6 @@ public class DangKi extends AppCompatActivity implements ViewXuLyDangKi {
         editDangKi.setText("");
         editMKhauDangKi.setText("");
         editMKhauDangKiAgain.setText("");
-        Toast.makeText(getApplicationContext(),"Làm Lại",Toast.LENGTH_SHORT).show();
     }
 
     @Override
