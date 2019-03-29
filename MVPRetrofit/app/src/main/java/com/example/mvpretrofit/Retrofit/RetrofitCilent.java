@@ -2,6 +2,7 @@ package com.example.mvpretrofit.Retrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +23,8 @@ public class RetrofitCilent {
         retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .client(builder)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         return retrofit;

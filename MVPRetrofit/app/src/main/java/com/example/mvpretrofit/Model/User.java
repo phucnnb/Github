@@ -1,22 +1,27 @@
 package com.example.mvpretrofit.Model;
 
-public class User {
-    String tendangnhap, matkhau;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public User(String tendangnhap, String matkhau) {
-        this.tendangnhap = tendangnhap;
+public class User {
+    @SerializedName("taikhoan")
+    @Expose
+    private String taikhoan;
+    @SerializedName("matkhau")
+    @Expose
+    private String matkhau;
+
+    public User(String taikhoan, String matkhau) {
+        this.taikhoan = taikhoan;
         this.matkhau = matkhau;
     }
 
-    public User( ) {
+    public String getTaikhoan() {
+        return taikhoan;
     }
 
-    public String getTendangnhap() {
-        return tendangnhap;
-    }
-
-    public void setTendangnhap(String tendangnhap) {
-        this.tendangnhap = tendangnhap;
+    public void setTaikhoan(String taikhoan) {
+        this.taikhoan = taikhoan;
     }
 
     public String getMatkhau() {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.example.mvpretrofit.Model.User;
 import com.example.mvpretrofit.Presenter.DangNhap.PresenterLogicDangNhap;
 import com.example.mvpretrofit.R;
 import com.example.mvpretrofit.View.DangKi.DangKi;
+import com.example.mvpretrofit.View.TrangChu.TrangChu;
 
 public class MainActivity extends AppCompatActivity implements ViewXuLyDangNhap {
 
@@ -23,6 +25,10 @@ public class MainActivity extends AppCompatActivity implements ViewXuLyDangNhap 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         init();
         logicDangNhap = new PresenterLogicDangNhap(this);
@@ -60,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements ViewXuLyDangNhap 
     @Override
     public void DangNhapThanhCong(String thongbao) {
         Toast.makeText(getApplicationContext(),thongbao,Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, TrangChu.class);
+        startActivity(intent);
+        finish();
 
     }
 

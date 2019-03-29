@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".View.DangKi.DangKi"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/gradient_2">
 
     <EditText
         android:id="@+id/editDangKi"
@@ -16,8 +17,11 @@
         android:layout_marginRight="16dp"
         android:hint="Tên Đăng Nhập"
         android:textColor="#000"
-        android:textColorLink="#000"
-        android:textSize="16sp" />
+        android:background="@drawable/view_edittext"
+        android:textSize="20sp"
+        android:paddingLeft="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
 
     <EditText
         android:id="@+id/editMKhauDangKi"
@@ -28,8 +32,11 @@
         android:layout_marginRight="16dp"
         android:hint="Mật Khẩu"
         android:textColor="#000"
-        android:textColorLink="#000"
-        android:textSize="16sp" />
+        android:background="@drawable/view_edittext"
+        android:textSize="20sp"
+        android:paddingLeft="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
     <EditText
         android:id="@+id/editMKhauDangKiAgain"
         android:layout_width="match_parent"
@@ -39,15 +46,19 @@
         android:layout_marginRight="16dp"
         android:hint="Mật Khẩu Xác Nhận"
         android:textColor="#000"
-        android:textColorLink="#000"
-        android:textSize="16sp" />
+        android:background="@drawable/view_edittext"
+        android:textSize="20sp"
+        android:paddingLeft="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp">
         <Button
             android:id="@+id/btnDangKiTaiKhoan"
             android:layout_width="100dp"

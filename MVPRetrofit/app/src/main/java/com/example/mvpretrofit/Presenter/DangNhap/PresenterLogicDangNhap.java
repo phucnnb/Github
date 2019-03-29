@@ -20,9 +20,9 @@ public class PresenterLogicDangNhap implements PresenterImpXuLyDangNhap {
     @Override
     public void ThucHienDangNhap(User user) {
 
-        final String thongbao = "Chào Bạn " + user.getTendangnhap() + " Ngày Mới Vui Vẻ" ;
+        final String thongbao = "Chào Bạn " + user.getTaikhoan() + " Ngày Mới Vui Vẻ" ;
         DataClient dataClient = APIUtils.getData();
-        Call<CheckKetQua> ketQuaCall = dataClient.LoginTaiKhoan(user.getTendangnhap(),user.getMatkhau());
+        Call<CheckKetQua> ketQuaCall = dataClient.LoginTaiKhoan(user.getTaikhoan(),user.getMatkhau());
         ketQuaCall.enqueue(new Callback<CheckKetQua>() {
             @Override
             public void onResponse(Call<CheckKetQua> call, Response<CheckKetQua> response) {
