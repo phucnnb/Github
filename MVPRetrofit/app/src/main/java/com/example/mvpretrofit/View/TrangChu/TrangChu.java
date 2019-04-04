@@ -2,16 +2,22 @@ package com.example.mvpretrofit.View.TrangChu;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-
+import com.example.mvpretrofit.Adapter.AdapterAndroid;
+import com.example.mvpretrofit.Adapter.AdapterUser;
+import com.example.mvpretrofit.Model.Android;
+import com.example.mvpretrofit.Model.User;
 import com.example.mvpretrofit.Presenter.TrangChu.PresenterLogicTrangChu;
 import com.example.mvpretrofit.R;
+
+import java.util.List;
 
 
 public class TrangChu extends AppCompatActivity implements ViewXuLyTrangChu {
@@ -20,7 +26,8 @@ public class TrangChu extends AppCompatActivity implements ViewXuLyTrangChu {
     LinearLayout layoutUser, layoutAndroid;
     PresenterLogicTrangChu logicTrangChu;
     RecyclerView recycler;
-
+    AdapterAndroid adapterAndroid;
+    AdapterUser adapterUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +35,13 @@ public class TrangChu extends AppCompatActivity implements ViewXuLyTrangChu {
         logicTrangChu = new PresenterLogicTrangChu(this,this);
         init();
         event();
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recycler.setLayoutManager(layoutManager);
+        adapterAndroid = new AdapterAndroid(this);
+        adapterUser = new AdapterUser(this);
+
+
+
     }
 
 
@@ -37,7 +51,7 @@ public class TrangChu extends AppCompatActivity implements ViewXuLyTrangChu {
             @Override
             public void onClick(View v) {
                 logicTrangChu.ThucHienClearData();
-                logicTrangChu.ThucHienLayDuLieuAndroid(recycler);
+                logicTrangChu.ThucHienLayDuLieuAndroid();
             }
         });
 
@@ -45,7 +59,7 @@ public class TrangChu extends AppCompatActivity implements ViewXuLyTrangChu {
             @Override
             public void onClick(View v) {
                 logicTrangChu.ThucHienClearData();
-                logicTrangChu.ThucHienLayDuLieuUser(recycler);
+                logicTrangChu.ThucHienLayDuLieuUser();
             }
         });
     }
@@ -59,13 +73,18 @@ public class TrangChu extends AppCompatActivity implements ViewXuLyTrangChu {
     }
 
     @Override
-    public void LayDuLieuUser() {
+    public void LayDuLieuUser(List<User> listUser) {
         txtTitle.setText("User");
+        adapterUser.setUsers(listUser);
+        recycler.setAdapter(adapterUser);
+
     }
 
     @Override
-    public void LayDuLieuAndroid() {
+    public void LayDuLieuAndroid(List<Android> listAndroid) {
         txtTitle.setText("Android");
+        adapterAndroid.setAndroids(listAndroid);
+        recycler.setAdapter(adapterAndroid);
     }
 
     @Override
@@ -73,10 +92,7 @@ public class TrangChu extends AppCompatActivity implements ViewXuLyTrangChu {
 
     }
 
-    @Override
-    public void Clear() {
 
-    }
 
     @Override
     protected void onDestroy() {

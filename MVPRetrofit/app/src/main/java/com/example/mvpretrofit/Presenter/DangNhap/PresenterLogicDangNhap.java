@@ -76,7 +76,15 @@ public class PresenterLogicDangNhap implements PresenterImpXuLyDangNhap {
     public void ThucHienCheck(MainActivity mainActivity, Boolean check) {
         share = mainActivity.getSharedPreferences("sharePre", Context.MODE_PRIVATE);
         boolean kiemtra = share.getBoolean("CHECK",false);
-        viewXuLyDangNhap.Check(kiemtra);
+
+        if(kiemtra){
+            String sdt = share.getString("SDT","");
+            String matkhau = share.getString("MATKHAU", "");
+            viewXuLyDangNhap.Check(kiemtra,sdt,matkhau);
+
+        }else {
+            viewXuLyDangNhap.Check(kiemtra,null,null);
+        }
 
     }
 }

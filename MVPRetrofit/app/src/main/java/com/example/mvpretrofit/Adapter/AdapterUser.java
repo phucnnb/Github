@@ -23,10 +23,14 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.UserHolder> {
     Context context;
     List<User> users;
 
-    public AdapterUser(Context context, List<User> users) {
+    public AdapterUser(Context context) {
         this.context = context;
+    }
+
+    public void setUsers(List<User> users) {
         this.users = users;
     }
+
 
     @NonNull
     @Override
@@ -54,7 +58,11 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.UserHolder> {
 
     @Override
     public int getItemCount() {
-        return users.size();
+        if(users != null){
+            return users.size();
+        }else {
+            return 0;
+        }
     }
 
     public class UserHolder extends RecyclerView.ViewHolder {

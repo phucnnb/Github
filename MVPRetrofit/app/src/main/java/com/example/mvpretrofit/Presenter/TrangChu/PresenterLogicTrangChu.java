@@ -1,17 +1,12 @@
 package com.example.mvpretrofit.Presenter.TrangChu;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.example.mvpretrofit.Adapter.AdapterAndroid;
-import com.example.mvpretrofit.Adapter.AdapterUser;
 import com.example.mvpretrofit.Model.Android;
 import com.example.mvpretrofit.Model.User;
 import com.example.mvpretrofit.Retrofit.APIUtils;
 import com.example.mvpretrofit.Retrofit.DataClient;
-import com.example.mvpretrofit.View.DangNhap.MainActivity;
 import com.example.mvpretrofit.View.TrangChu.ViewXuLyTrangChu;
 
 import java.util.ArrayList;
@@ -28,12 +23,10 @@ public class PresenterLogicTrangChu implements PresenterImpXuLyTrangChu {
     ViewXuLyTrangChu viewXuLyTrangChu = null;
     Context context;
     CompositeDisposable compositeDisposable;
-    AdapterAndroid adapterAndroid;
-    AdapterUser adapterUser;
     List<Android> listAndroid = null;
     List<User> listUser = null;
     DisposableObserver<List<Android>> disposableObserverAndroid;
-    DisposableObserver<List<User>> disposableObserverUser;
+    private DisposableObserver<List<User>> disposableObserverUser;
 
     public PresenterLogicTrangChu(ViewXuLyTrangChu viewXuLyTrangChu, Context context) {
         this.viewXuLyTrangChu = viewXuLyTrangChu;
@@ -41,24 +34,15 @@ public class PresenterLogicTrangChu implements PresenterImpXuLyTrangChu {
     }
 
     @Override
-    public void ThucHienLayDuLieuUser(final RecyclerView recycler) {
-        viewXuLyTrangChu.LayDuLieuUser();
+    public void ThucHienLayDuLieuUser() {
         listUser = new ArrayList();
         compositeDisposable = new CompositeDisposable();
 
         disposableObserverUser = new DisposableObserver<List<User>>() {
             @Override
             public void onNext(List<User> users) {
-                for(int i= 0; i < users.size(); i ++ ){
-                    listUser.add(users.get(i));
-                    Log.d("DDD",users.get(i).getTaikhoan());
-                    Log.d("DDD",users.get(i).getMatkhau());
-                }
-
-                adapterUser = new AdapterUser(context,listUser);
-                Log.d("EEE",users.get(3).getTaikhoan());
-                Log.d("EEE",users.get(3).getMatkhau());
-                recycler.setAdapter(adapterUser);
+                listUser = users;
+                viewXuLyTrangChu.LayDuLieuUser(users);
             }
 
             @Override
@@ -71,43 +55,29 @@ public class PresenterLogicTrangChu implements PresenterImpXuLyTrangChu {
 
             }
         };
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-        recycler.setLayoutManager(layoutManager);
-
         XuLyDuLieuUser();
-
     }
 
     private void XuLyDuLieuUser() {
         DataClient dataClient = APIUtils.getData();
-        Log.d("AAA",dataClient.toString());
         Disposable disposable = dataClient.loadUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 //.subscribe(this::handleResponse,this::handleError,this::handleSuccess);
                 .subscribeWith(disposableObserverUser);
-        Log.d("AAA",disposable.toString());
         compositeDisposable.add(disposable);
     }
 
     @Override
-    public void ThucHienLayDuLieuAndroid(final RecyclerView recycler) {
-        viewXuLyTrangChu.LayDuLieuAndroid();
+    public void ThucHienLayDuLieuAndroid() {
         listAndroid = new ArrayList();
         compositeDisposable = new CompositeDisposable();
-
 
         disposableObserverAndroid = new DisposableObserver<List<Android>>() {
             @Override
             public void onNext(List<Android> androids) {
-                for(int i= 0; i < androids.size(); i ++ ){
-                    listAndroid.add(androids.get(i));
-                    Log.d("BBBB","BBBBBB" + listAndroid.toString());
-                }
-
-                adapterAndroid = new AdapterAndroid(context,listAndroid);
-                recycler.setAdapter(adapterAndroid);
+                listAndroid = androids;
+                viewXuLyTrangChu.LayDuLieuAndroid(listAndroid);
             }
 
             @Override
@@ -120,31 +90,19 @@ public class PresenterLogicTrangChu implements PresenterImpXuLyTrangChu {
 
             }
         };
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-        recycler.setLayoutManager(layoutManager);
-
         XuLyDuLieuAndroid();
-
-
     }
 
     private void XuLyDuLieuAndroid() {
         DataClient dataClient = APIUtils.getData();
-        Log.d("AAA",dataClient.toString());
         Disposable disposable = dataClient.register()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 //.subscribe(this::handleResponse,this::handleError,this::handleSuccess);
                 .subscribeWith(disposableObserverAndroid);
-        Log.d("AAA",disposable.toString());
         compositeDisposable.add(disposable);
     }
 
-    @Override
-    public void ThucHienRecyclerView() {
-        viewXuLyTrangChu.XuLyRecycler();
-    }
 
     @Override
     public void ThucHienXoaView() {

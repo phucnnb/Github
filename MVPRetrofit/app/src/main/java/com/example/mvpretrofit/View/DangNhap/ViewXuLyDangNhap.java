@@ -4,5 +4,5 @@ public interface ViewXuLyDangNhap {
     void DangNhapThanhCong(String thongbao);
     void DangNhapThatBai();
     void DangKi();
-    void Check(Boolean check);
+    void Check(Boolean check, String sdt, String matkhau);
 }

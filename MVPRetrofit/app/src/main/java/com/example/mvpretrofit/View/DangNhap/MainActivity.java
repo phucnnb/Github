@@ -1,13 +1,9 @@
 package com.example.mvpretrofit.View.DangNhap;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
-import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -117,16 +113,10 @@ public class MainActivity extends AppCompatActivity implements ViewXuLyDangNhap 
     }
 
     @Override
-    public void Check(Boolean check) {
-        if(check){
-            String sdt = share.getString("SDT","");
-            String matkhau = share.getString("MATKHAU", "");
-            editTenDangNhap.setText(sdt);
-            editMatKhau.setText(matkhau);
-            cbSave.setChecked(true);
-        }else {
-            cbSave.setChecked(false);
-        }
+    public void Check(Boolean check, String sdt, String matkhau) {
+        editTenDangNhap.setText(sdt);
+        editMatKhau.setText(matkhau);
+        cbSave.setChecked(check);
     }
 
     @Override

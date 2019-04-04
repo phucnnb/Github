@@ -19,8 +19,11 @@ public class AdapterAndroid extends RecyclerView.Adapter<AdapterAndroid.AndroidH
         Context context;
         List<Android> androids;
 
-    public AdapterAndroid(Context context, List<Android> androids) {
+    public AdapterAndroid(Context context) {
         this.context = context;
+    }
+
+    public void setAndroids(List<Android> androids) {
         this.androids = androids;
     }
 
@@ -52,7 +55,11 @@ public class AdapterAndroid extends RecyclerView.Adapter<AdapterAndroid.AndroidH
 
     @Override
     public int getItemCount() {
-        return androids.size();
+        if(androids != null) {
+            return androids.size();
+        }else {
+            return 0;
+        }
     }
 
     public class AndroidHolder extends RecyclerView.ViewHolder {
