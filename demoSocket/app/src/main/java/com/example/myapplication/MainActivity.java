@@ -39,14 +39,16 @@ public class MainActivity extends AppCompatActivity {
     EditText editSend;
 
     @BindView(R.id.recyclerView)
-    ListView lvNoiDung;
+    RecyclerView recyclerView;
 
     @BindView(R.id.lvUser)
     ListView lvUser;
 
     private Socket socket;
     private ArrayAdapter adapterUser, adapterNoiDung;
-    private ArrayList<String> arrayUser, arrayNoiDung;
+    private ArrayList<String> arrayUser;
+    private AdapterChat adapterChat;
+    private List<Chat> listChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +86,11 @@ public class MainActivity extends AppCompatActivity {
         adapterUser = new ArrayAdapter(this,android.R.layout.simple_list_item_1, arrayUser);
         lvUser.setAdapter(adapterUser);
 
-        arrayNoiDung = new ArrayList<>();
-        adapterNoiDung = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayNoiDung);
-        lvNoiDung.setAdapter(adapterNoiDung);
+        listChat = new ArrayList<>();
+        //adapterNoiDung = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayNoiDung);
+        adapterChat = new AdapterChat(MainActivity.this,listChat);
+        recyclerView.setAdapter(adapterChat);
+        recyclerView.setAdapter(adapterChat);
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,11 +119,15 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+
                     JSONObject object = (JSONObject) args[0];
+                    Log.d("EEE",object.toString());
                     try {
-                        String noiDung = object.getString("chatConent");
-                        arrayNoiDung.add(noiDung);
-                        adapterNoiDung.notifyDataSetChanged();
+                        String user = object.getString("user");
+                        String mess = object.getString("chatConent");
+                        Chat chat = new Chat(user,mess);
+                        listChat.add(chat);
+                        adapterChat.notifyDataSetChanged();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
