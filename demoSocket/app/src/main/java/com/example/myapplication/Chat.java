@@ -2,14 +2,15 @@ package com.example.myapplication;
 
 public class Chat {
 
-    String user, message;
+    private String user, message,date;
 
-    public Chat(String user, String message) {
+    Chat(String user, String message, String date) {
         this.user = user;
         this.message = message;
+        this.date = date;
     }
 
-    public String getUser() {
+    String getUser() {
         return user;
     }
 
@@ -17,11 +18,19 @@ public class Chat {
         this.user = user;
     }
 
-    public String getMessage() {
+    String getMessage() {
         return message;
     }
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

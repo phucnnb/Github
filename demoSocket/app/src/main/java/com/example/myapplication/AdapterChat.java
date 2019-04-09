@@ -12,10 +12,10 @@ import java.util.List;
 
 public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ChatHolder> {
 
-    Context context;
-    List<Chat> chats;
+    private Context context;
+    private List<Chat> chats;
 
-    public AdapterChat(Context context, List<Chat> chats) {
+    AdapterChat(Context context, List<Chat> chats) {
         this.context = context;
         this.chats = chats;
     }
@@ -25,8 +25,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ChatHolder> {
     public ChatHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = layoutInflater.inflate(R.layout.item_chat,viewGroup,false);
-        ChatHolder chatHolder = new ChatHolder(itemView);
-        return chatHolder;
+        return new ChatHolder(itemView);
     }
 
     @Override
@@ -34,6 +33,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ChatHolder> {
         Chat chat = chats.get(i);
         chatHolder.tvUser.setText(chat.getUser());
         chatHolder.tvChat.setText(chat.getMessage());
+        chatHolder.tvTime.setText(chat.getDate());
     }
 
     @Override
@@ -41,12 +41,13 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ChatHolder> {
         return chats.size();
     }
 
-    public class ChatHolder extends RecyclerView.ViewHolder {
-        TextView tvUser,tvChat;
-        public ChatHolder(@NonNull View itemView) {
+    class ChatHolder extends RecyclerView.ViewHolder {
+        TextView tvUser,tvChat,tvTime;
+         ChatHolder(@NonNull View itemView) {
             super(itemView);
             tvUser = itemView.findViewById(R.id.tvUser);
             tvChat = itemView.findViewById(R.id.tvChat);
+            tvTime = itemView.findViewById(R.id.tvTime);
         }
     }
 }

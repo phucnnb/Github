@@ -1,7 +1,9 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -9,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -17,7 +18,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     ListView lvUser;
 
     private Socket socket;
-    private ArrayAdapter adapterUser, adapterNoiDung;
+    private ArrayAdapter<String> adapterUser;
     private ArrayList<String> arrayUser;
     private AdapterChat adapterChat;
     private List<Chat> listChat;
@@ -66,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void call(Object... args) {
-                Log.d("AAA","AAAAAAAAAAAAAAAAAAAA");
 
             }
 
@@ -83,21 +85,28 @@ public class MainActivity extends AppCompatActivity {
         socket.on("server-send-chat",onListChat);
 
         arrayUser = new ArrayList<>();
-        adapterUser = new ArrayAdapter(this,android.R.layout.simple_list_item_1, arrayUser);
+        adapterUser = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, arrayUser);
         lvUser.setAdapter(adapterUser);
 
         listChat = new ArrayList<>();
-        //adapterNoiDung = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayNoiDung);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         adapterChat = new AdapterChat(MainActivity.this,listChat);
         recyclerView.setAdapter(adapterChat);
-        recyclerView.setAdapter(adapterChat);
+
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(editSend.getText().toString().trim().length() > 0){
-                    Log.d("BBB",editSend.getText().toString());
+                    Calendar c = Calendar.getInstance();
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa");
+                    String datetime = dateformat.format(c.getTime());
+                    socket.emit("client-send-time",datetime);
                     socket.emit("client-send-chat",editSend.getText().toString());
+
+                    editSend.setText("");
+
                 }
             }
         });
@@ -106,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(editSend.getText().toString().trim().length() > 0){
-                    Log.d("BBB",editSend.getText().toString());
                     socket.emit("client-register-user",editSend.getText().toString());
                 }
             }
@@ -125,7 +133,9 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         String user = object.getString("user");
                         String mess = object.getString("chatConent");
-                        Chat chat = new Chat(user,mess);
+                        String date = object.getString("time");
+                        Log.d("AAAA",user + "   " + mess+ "    " +date);
+                        Chat chat = new Chat(user,mess,date);
                         listChat.add(chat);
                         adapterChat.notifyDataSetChanged();
                     } catch (JSONException e) {
@@ -151,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
                             String username = array.getString(i);
                             arrayUser.add(username);
                             adapterUser.notifyDataSetChanged();
-                            Toast.makeText(getApplicationContext(),username,Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
