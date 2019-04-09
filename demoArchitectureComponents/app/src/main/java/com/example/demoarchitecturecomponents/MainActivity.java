@@ -50,12 +50,13 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbarTitle)
     Toolbar toolbarTitle;
 
-    ArrayList<User> listUser ;
+    ArrayList<User> listUser;
     ArrayAdapter<User> adapter;
     ActionBar actionBar;
 
     private CompositeDisposable compositeDisposable;
     private UserRepository userRepository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,13 +65,13 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbarTitle);
         actionBar = getSupportActionBar();
-       // actionBar.setDisplayHomeAsUpEnabled(true);
+        // actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("");
 
 
         compositeDisposable = new CompositeDisposable();
         listUser = new ArrayList<>();
-        adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,listUser);
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listUser);
         registerForContextMenu(lvUser);
         lvUser.setAdapter(adapter);
 
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 Disposable disposable = (Disposable) Observable.create(new ObservableOnSubscribe<Object>() {
                     @Override
                     public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
-                        User user = new User("Phúc", UUID.randomUUID().toString()+"@gmail.com");
+                        User user = new User("Phúc", UUID.randomUUID().toString() + "@gmail.com");
                         userRepository.insertUser(user);
                         emitter.onComplete();
                     }
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        Disposable disposable =userRepository.getAllUsers()
+        Disposable disposable = userRepository.getAllUsers()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Consumer<List<User>>() {
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(MainActivity.this,"" + throwable.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
         compositeDisposable.add(disposable);
@@ -144,13 +145,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar,menu);
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_clear:
                 deleteAllUsers();
                 break;
@@ -193,21 +194,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         menu.setHeaderTitle("Select Action: ");
 
-        menu.add(Menu.NONE,0,Menu.NONE,"UPDATE");
-        menu.add(Menu.NONE,1,Menu.NONE,"DETELE");
+        menu.add(Menu.NONE, 0, Menu.NONE, "UPDATE");
+        menu.add(Menu.NONE, 1, Menu.NONE, "DETELE");
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         final User user = listUser.get(info.position);
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             //update
-            case 0:{
+            case 0: {
                 final EditText editName = new EditText(MainActivity.this);
                 editName.setText(user.getName());
                 editName.setHint("Enter your name");
@@ -218,9 +219,9 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if(TextUtils.isEmpty(editName.getText().toString())){
+                                if (TextUtils.isEmpty(editName.getText().toString())) {
                                     return;
-                                }else {
+                                } else {
                                     user.setName(editName.getText().toString());
                                     updateUser(user);
                                 }
@@ -235,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             break;
 
             //detele
-            case 1:{
+            case 1: {
                 new AlertDialog.Builder(MainActivity.this)
                         .setMessage("Do you want delete" + user.getName())
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -300,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
                                @Override
                                public void accept(Object o) throws Exception {
 
-                                   }
+                               }
                            }, new Consumer<Throwable>() {
                                @Override
                                public void accept(Throwable throwable) throws Exception {

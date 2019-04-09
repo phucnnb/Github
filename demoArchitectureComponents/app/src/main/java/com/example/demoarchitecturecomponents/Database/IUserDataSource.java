@@ -1,10 +1,5 @@
 package com.example.demoarchitecturecomponents.Database;
 
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
-
 import com.example.demoarchitecturecomponents.Model.User;
 
 import java.util.List;
