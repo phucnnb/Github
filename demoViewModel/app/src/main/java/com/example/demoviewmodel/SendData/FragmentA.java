@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,11 @@ public class FragmentA extends Fragment {
     private EditText editA;
     private Button btn_A;
     private ShareViewModel shareViewModel;
+    private int i = 0;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_a,container,false);
 
@@ -32,7 +34,9 @@ public class FragmentA extends Fragment {
         btn_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shareViewModel.setCheck(1);
                 shareViewModel.setText(editA.getText());
+                editA.setText("");
             }
         });
         return v;
@@ -42,11 +46,23 @@ public class FragmentA extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         shareViewModel = ViewModelProviders.of(getActivity()).get(ShareViewModel.class);
-        shareViewModel.getText().observe(this, new Observer<CharSequence>() {
+        shareViewModel.getCheck().observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(@Nullable CharSequence charSequence) {
-                editA.setText(charSequence);
+            public void onChanged(@Nullable Integer integer) {
+                Log.d("AAAA",integer + " AAAAAAAAAAA");
+                i = integer;
+                if(i == 2){
+                    shareViewModel.getText().observe(getViewLifecycleOwner(), new Observer<CharSequence>() {
+                        @Override
+                        public void onChanged(@Nullable CharSequence charSequence) {
+                            if (charSequence.length() != 0){
+                                editA.setText(charSequence);
+                            }
+                        }
+                    });
+                }
             }
         });
+
     }
 }

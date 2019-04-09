@@ -20,6 +20,7 @@ public class FragmentB extends Fragment {
     private EditText editB;
     private Button btnB;
     private ShareViewModel shareViewModel;
+    private int i = 0;
 
 
     @Nullable
@@ -32,7 +33,9 @@ public class FragmentB extends Fragment {
         btnB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shareViewModel.setCheck(2);
                 shareViewModel.setText(editB.getText());
+                editB.setText("");
             }
         });
         return v;
@@ -42,11 +45,24 @@ public class FragmentB extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         shareViewModel = ViewModelProviders.of(getActivity()).get(ShareViewModel.class);
-        shareViewModel.getText().observe(this, new Observer<CharSequence>() {
+        shareViewModel.getCheck().observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(@Nullable CharSequence charSequence) {
-                editB.setText(charSequence);
+            public void onChanged(@Nullable Integer integer) {
+                i = integer;
+                if(i == 1){
+                    shareViewModel.getText().observe(getViewLifecycleOwner(), new Observer<CharSequence>() {
+                        @Override
+                        public void onChanged(@Nullable CharSequence charSequence) {
+                            if (charSequence.length() != 0){
+                                editB.setText(charSequence);
+                            }
+
+                        }
+                    });
+                }
             }
         });
+
+
     }
 }
