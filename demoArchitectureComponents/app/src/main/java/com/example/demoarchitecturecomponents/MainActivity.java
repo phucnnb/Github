@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbarTitle);
         actionBar = getSupportActionBar();
-        // actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("");
 
 
