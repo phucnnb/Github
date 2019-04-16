@@ -3,11 +3,11 @@ package com.example.demofirebase.Model;
 public class User {
 
     String email;
-    String matKhau;
+    String linkImage;
 
-    public User(String email, String matKhau) {
+    public User(String email, String linkImage) {
         this.email = email;
-        this.matKhau = matKhau;
+        this.linkImage = linkImage;
     }
 
     public String getEmail() {
@@ -18,11 +18,11 @@ public class User {
         this.email = email;
     }
 
-    public String getMatKhau() {
-        return matKhau;
+    public String getLinkImage() {
+        return linkImage;
     }
 
-    public void setMatKhau(String matKhau) {
-        this.matKhau = matKhau;
+    public void setLinkImage(String linkImage) {
+        this.linkImage = linkImage;
     }
 }
