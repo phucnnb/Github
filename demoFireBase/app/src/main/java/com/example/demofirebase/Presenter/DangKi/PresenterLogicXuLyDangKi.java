@@ -161,6 +161,6 @@ public class PresenterLogicXuLyDangKi implements PresenterImpXuLyDangKy {
 
     @Override
     public void ThucHienXoaView() {
-        viewXuLyDangKi.XoaView();
+        viewXuLyDangKi = null;
     }
 }

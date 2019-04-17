@@ -5,6 +5,11 @@ public class User {
     String email;
     String linkImage;
 
+    public User() {
+    }
+
+
+
     public User(String email, String linkImage) {
         this.email = email;
         this.linkImage = linkImage;
