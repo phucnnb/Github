@@ -49,6 +49,7 @@ public class PresenterLogicXuLyDangKi implements PresenterImpXuLyDangKy {
     private String path;
     private Bitmap bitmap;
     private DatabaseReference mData = firebaseDatabase.getReference();
+    private Boolean checkImage = false;
 
 
     public PresenterLogicXuLyDangKi(ViewXuLyDangKi viewXuLyDangKi, Context context) {
@@ -59,25 +60,29 @@ public class PresenterLogicXuLyDangKi implements PresenterImpXuLyDangKy {
 
     @Override
     public void ThucHienDangKi(final String email, String matKhau, String matKhauAgain) {
-        if(email.length() != 0 && matKhau.length() != 0 && matKhauAgain.length() != 0){
-            if(matKhau.equals(matKhauAgain)){
-                mAuth.createUserWithEmailAndPassword(email, matKhau)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    UploadImage(email);
-                                    viewXuLyDangKi.DangKiTaiKhoan(false,R.string.dang_ki_thanh_cong);
-                                } else {
-                                    viewXuLyDangKi.DangKiTaiKhoan(false,R.string.dang_ki_khong_thanh_cong);
+        if(checkImage){
+            if(email.length() != 0 && matKhau.length() != 0 && matKhauAgain.length() != 0 ){
+                if(matKhau.equals(matKhauAgain)){
+                    mAuth.createUserWithEmailAndPassword(email, matKhau)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        UploadImage(email);
+                                        viewXuLyDangKi.DangKiTaiKhoan(false,R.string.dang_ki_thanh_cong);
+                                    } else {
+                                        viewXuLyDangKi.DangKiTaiKhoan(false,R.string.dang_ki_khong_thanh_cong);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }else {
+                    viewXuLyDangKi.DangKiTaiKhoan(false, R.string.mat_khau_xac_nhan_sai);
+                }
             }else {
-                viewXuLyDangKi.DangKiTaiKhoan(false, R.string.mat_khau_xac_nhan_sai);
+                viewXuLyDangKi.DangKiTaiKhoan(false, R.string.hay_dien_day_du_thong_tin);
             }
         }else {
-            viewXuLyDangKi.DangKiTaiKhoan(false, R.string.hay_dien_day_du_thong_tin);
+            viewXuLyDangKi.DangKiTaiKhoan(false,R.string.chua_co_hinh_anh);
         }
     }
 
@@ -125,6 +130,7 @@ public class PresenterLogicXuLyDangKi implements PresenterImpXuLyDangKy {
 
     @Override
     public void ThucHienSetImage(int requestCode, int resultCode, Intent data) {
+        checkImage = true;
         if(requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null){
             Uri uri = data.getData();
             path = getRealPathFromURI(uri);
