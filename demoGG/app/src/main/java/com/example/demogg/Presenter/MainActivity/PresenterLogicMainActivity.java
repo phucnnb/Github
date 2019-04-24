@@ -36,6 +36,7 @@ public class PresenterLogicMainActivity implements PresenterImpMainActivity {
 
     @Override
     public void ThucHienSetMap(GoogleMap googleMap, Double lat, Double lng) {
+        googleMap.clear();
         googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
         LatLng myLatLng =new LatLng(lat,lng);
@@ -51,7 +52,6 @@ public class PresenterLogicMainActivity implements PresenterImpMainActivity {
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
             BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.cast_abc_scrubber_control_off_mtrl_alpha);
-
             options.icon(bitmapDescriptor);
             options.position(myLatLng);
             currentMarker = googleMap.addMarker(options);

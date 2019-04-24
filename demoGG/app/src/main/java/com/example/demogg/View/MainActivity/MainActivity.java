@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @Override
     public void onLocationChanged(Location location) {
+        Log.d("AAA", "reload");
         logicMainActivity.ThucHienSetMap(googleMap, location.getLatitude(), location.getLongitude());
     }
 
@@ -104,17 +105,21 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mLocationRequest = LocationRequest.create();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(1000);
+
         location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
         if(location == null){
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,mLocationRequest,this);
-            //Log.d("AAA",location.toString() + "BBBBBB");
+           //logicMainActivity.ThucHienSetMap(googleMap, location.getLatitude(), location.getLongitude());
+            Log.d("AAA", "updateLocation");
 
         }else {
-            
+            Log.d("AAA", "not updateLocation");
             logicMainActivity.ThucHienSetMap(googleMap, location.getLatitude(), location.getLongitude());
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,mLocationRequest,this);
         }
 
     }
@@ -122,5 +127,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     @Override
     public void onConnectionSuspended(int i) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        location = null;
     }
 }
