@@ -3,7 +3,7 @@ package com.example.demogg.Presenter.MainActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.LocationManager;
+
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 
@@ -18,15 +18,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import static android.content.Context.LOCATION_SERVICE;
-
 public class PresenterLogicMainActivity implements PresenterImpMainActivity {
 
     private ViewMainActivity viewMainActivity;
     private Context context;
     private MarkerOptions options = new MarkerOptions();
     private Marker currentMarker;
-    private LocationManager locationManager;
+
 
 
     public PresenterLogicMainActivity(ViewMainActivity viewMainActivity, Context context) {

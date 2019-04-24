@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.MainActivity.MainActivity"
+    tools:context=".View.TimDuong.TimDuong"
     android:orientation="vertical">
 
     <fragment
@@ -15,9 +15,8 @@
         tools:context="com.example.mapwithmarker.MapsMarkerActivity"
         android:layout_weight="2"/>
     <Button
-        android:id="@+id/btnTimDuong"
+        android:id="@+id/btnAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tìm Đường"/>
-
+        android:text="Address"/>
 </LinearLayout>
