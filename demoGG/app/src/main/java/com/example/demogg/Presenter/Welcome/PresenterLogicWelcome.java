@@ -29,13 +29,13 @@ public class PresenterLogicWelcome implements PresenterImpWelcome {
 
     @Override
     public void ThucHienChuyenActivity(Location location, SharedPreferences share) {
-        Double latitude = location.getLatitude();
+        /*Double latitude = location.getLatitude();
         Double longitude = location.getLongitude();
 
         SharedPreferences.Editor editor = share.edit();
         editor.putString("Latitude", String.valueOf(latitude));
         editor.putString("Longitude",String.valueOf(longitude));
-        editor.commit();
+        editor.commit();*/
         viewWelcome.ChuyenActivity();
     }
 

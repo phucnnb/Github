@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.demogg.Presenter.Welcome.PresenterLogicWelcome;
 import com.example.demogg.R;
@@ -32,7 +33,7 @@ import com.google.android.gms.location.LocationServices;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class Welcome extends AppCompatActivity implements ViewWelcome, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
+public class Welcome extends AppCompatActivity implements ViewWelcome, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener, android.location.LocationListener {
 
     @BindView(R.id.btnChao)
     Button btnChao;
@@ -43,6 +44,8 @@ public class Welcome extends AppCompatActivity implements ViewWelcome, GoogleApi
     private Location location;
     private SharedPreferences share;
     private LocationRequest mLocationRequest;
+    private Boolean kt = false;
+    private LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,22 @@ public class Welcome extends AppCompatActivity implements ViewWelcome, GoogleApi
         Check();
 
         event();
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /*if(kt){
+            Toast.makeText(getApplicationContext(),"OK",Toast.LENGTH_SHORT).show();
+
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1,this);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1,this);
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,mLocationRequest,this);
+            kt = false;
+        }*/
+
     }
 
     private void Check() {
@@ -75,14 +94,14 @@ public class Welcome extends AppCompatActivity implements ViewWelcome, GoogleApi
 
     }
 
+
     private void event() {
         btnChao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                googleApiClient.connect();
+                //googleApiClient.connect();
+                //Check2();
                 logicWelcome.ThucHienChuyenActivity(location, share);
-
-
             }
         });
     }
@@ -125,15 +144,15 @@ public class Welcome extends AppCompatActivity implements ViewWelcome, GoogleApi
     @SuppressLint("MissingPermission")
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        mLocationRequest = LocationRequest.create();
+       mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setInterval(1000);
         location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         if(location == null){
+            kt = true;
             logicWelcome.ThucHienShowAlert();
-            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,mLocationRequest,this);
         }
-        //Log.d("AAA",location.toString());
+        Log.d("AAA",location.toString());
     }
 
     @Override
@@ -159,6 +178,21 @@ public class Welcome extends AppCompatActivity implements ViewWelcome, GoogleApi
 
     @Override
     public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
 
     }
 }
