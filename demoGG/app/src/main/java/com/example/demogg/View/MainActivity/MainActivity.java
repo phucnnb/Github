@@ -16,12 +16,14 @@ import android.util.Log;
 import com.example.demogg.Presenter.MainActivity.PresenterLogicMainActivity;
 import com.example.demogg.R;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,OnMapReadyCallback, android.location.LocationListener, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, ViewMainActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener,GoogleApiClient.ConnectionCallbacks,OnMapReadyCallback, android.location.LocationListener, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, ViewMainActivity {
 
 
     private SupportMapFragment mapFragment;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private LocationManager locationManager;
     private GoogleApiClient googleApiClient;
     private Location location;
+    private LocationRequest mLocationRequest;
+    GoogleMap googleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onLocationChanged(Location location) {
-
+        logicMainActivity.ThucHienSetMap(googleMap, location.getLatitude(), location.getLongitude());
     }
 
     @Override
@@ -86,34 +90,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //lat = Double.parseDouble(share.getString("Latitude", ""));
-        //lng = Double.parseDouble(share.getString("Longitude", ""));
-
-        if(location != null){
-            lat = location.getLatitude();
-            lng = location.getLongitude();
-            Log.d("AAA", "AAAAAAAAAAAAAAAAAA");
-            logicMainActivity.ThucHienSetMap(googleMap, lat, lng);
-
-            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 10, this);
-
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10, 10, this);
-        }else {
-            googleApiClient.connect();
-
-        }
+        this.googleMap = googleMap;
+        googleApiClient.connect();
 
     }
 
@@ -125,7 +103,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @SuppressLint("MissingPermission")
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(1000);
         location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+
+        if(location == null){
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,mLocationRequest,this);
+            //Log.d("AAA",location.toString() + "BBBBBB");
+
+        }else {
+            
+            logicMainActivity.ThucHienSetMap(googleMap, location.getLatitude(), location.getLongitude());
+        }
 
     }
 

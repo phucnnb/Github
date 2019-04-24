@@ -152,7 +152,7 @@ public class Welcome extends AppCompatActivity implements ViewWelcome, GoogleApi
             kt = true;
             logicWelcome.ThucHienShowAlert();
         }
-        Log.d("AAA",location.toString());
+//        Log.d("AAA",location.toString());
     }
 
     @Override
