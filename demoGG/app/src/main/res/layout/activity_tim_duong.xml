@@ -18,5 +18,10 @@
         android:id="@+id/btnAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Address"/>
+        android:text="Add Address"/>
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="search"/>
 </LinearLayout>

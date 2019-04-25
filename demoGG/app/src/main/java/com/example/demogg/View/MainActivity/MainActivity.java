@@ -74,11 +74,22 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         btnTimDuong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("BBB",location.toString());
                 Intent i = new Intent(MainActivity.this, TimDuong.class);
+                Bundle bundle = new Bundle();
+                Check2();
+                bundle.putDouble("LAT", location.getLatitude());
+                bundle.putDouble("LNG", location.getLongitude());
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });
     }
+
+    private void Check2() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient,this);
+    }
+
 
     @Override
     public void onLocationChanged(Location location) {
