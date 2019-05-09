@@ -6,17 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 
-class SwipeStackAdapter : RecyclerView.Adapter<SwipeStackAdapter.ItemHolder>{
+class SwipeStackAdapter(private var context: Context?, items: List<Item>) :
+    RecyclerView.Adapter<SwipeStackAdapter.ItemHolder>() {
 
-    private var context: Context? = null
-    private var items: List<Item>? = null
-
-    constructor(context: Context?, items: List<Item>) : super() {
-        this.context = context
-        this.items = items
-    }
+    private var items: List<Item>? = items
 
     fun setList(items: List<Item>){
         this.items = items

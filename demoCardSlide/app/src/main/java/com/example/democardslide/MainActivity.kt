@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.animation.DecelerateInterpolator
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity(),ViewImp, CardStackListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         manager = CardStackLayoutManager(this,this)
-        logic = PresenterLogic(this,this)
+        logic = PresenterLogic(this)
 
         logic.ThucHienPrepareListData()
         logic.ThucHienCardStackView()

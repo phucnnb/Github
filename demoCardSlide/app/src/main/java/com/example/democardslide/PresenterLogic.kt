@@ -1,24 +1,16 @@
 package com.example.democardslide
 
-import android.content.Context
 
-class PresenterLogic : PresenterImp{
+class PresenterLogic(view: ViewImp) : PresenterImp{
 
-    private var viewImp : ViewImp
-    private var  context : Context
+    private var viewImp : ViewImp = view
     private var listData: List<Item> = ArrayList()
-
-    constructor(view: ViewImp, context: Context) {
-        this.viewImp = view
-        this.context = context
-    }
-
 
 
     override fun ThucHienPrepareListData() {
-        val data1 : Item = Item(R.drawable.chicken,"Gà Chiên","Nguyên Liệu Chính Là Gà")
-        val data2 : Item = Item(R.drawable.meat,"Thịt Chiên","Nguyên Liệu Chính Là Thịt Heo")
-        val data3 : Item = Item(R.drawable.vegetable,"Rau Củ Trộn","Nguyên Liệu Chính Là Rau Củ")
+        val data1  = Item(R.drawable.chicken,"Gà Chiên","Nguyên Liệu Chính Là Gà")
+        val data2  = Item(R.drawable.meat,"Thịt Chiên","Nguyên Liệu Chính Là Thịt Heo")
+        val data3  = Item(R.drawable.vegetable,"Rau Củ Trộn","Nguyên Liệu Chính Là Rau Củ")
         (listData as ArrayList<Item>).add(data1)
         (listData as ArrayList<Item>).add(data2)
         (listData as ArrayList<Item>).add(data3)

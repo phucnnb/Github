@@ -1,17 +1,6 @@
 package com.example.democardslide
 
-class Item{
-    private var linkImage : Int = 0
-    private var title : String = ""
-    private var substance : String = ""
-
-    constructor(linkImage : Int,title : String, substance : String){
-        this.linkImage = linkImage
-        this.title = title
-        this.substance = substance
-    }
-
-    constructor()
+class Item(private var linkImage: Int, private var title: String, private var substance: String) {
 
     fun setLinkImage(linkImage : Int){
         this.linkImage = linkImage
@@ -21,7 +10,7 @@ class Item{
         return this.linkImage
     }
 
-    fun setTitle(title : String){
+    fun seTitle(title : String){
         this.title = title
     }
 
