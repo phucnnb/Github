@@ -21,36 +21,36 @@ class MainActivity : AppCompatActivity(),ViewImp, CardStackListener {
         manager = CardStackLayoutManager(this,this)
         logic = PresenterLogic(this)
 
-        logic.ThucHienPrepareListData()
-        logic.ThucHienCardStackView()
+        logic.thucHienPrepareListData()
+        logic.thucHienCardStackView()
 
         btnBack.setOnClickListener {
-            logic.ThucHienRewind()
+            logic.thucHienRewind()
         }
 
     }
 
-    override fun PrepareData(listData: ArrayList<Item>) {
+    override fun prepareData(listData: ArrayList<Item>) {
         Log.d("AAA", listData.toString())
     }
 
-    override fun CardStackView(listData: List<Item>) {
+    override fun cardStackView(listData: List<Item>) {
         size = listData.size - 1
         adapterSwipe = SwipeStackAdapter(this,listData)
         card_stack_view.layoutManager = CardStackLayoutManager(this,this)
         card_stack_view.adapter = adapterSwipe
     }
 
-    override fun SlidePanel() {
+    override fun slidePanel() {
         Log.d("AAA", "AAAAAAAAAAAAAAAAAAAAA")
     }
 
-    override fun Reload(listData: List<Item>) {
+    override fun reload(listData: List<Item>) {
         adapterSwipe.setList(listData)
         adapterSwipe.notifyDataSetChanged()
     }
 
-    override fun Rewind() {
+    override fun rewind() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(),ViewImp, CardStackListener {
     override fun onCardSwiped(direction: Direction?) {
         Log.d("AAA", "onCardSwiped")
         if(check == size){
-             logic.ThucHienReload()
+             logic.thucHienReload()
 
         }
     }

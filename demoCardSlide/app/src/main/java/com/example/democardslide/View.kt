@@ -1,9 +1,9 @@
 package com.example.democardslide
 
 interface ViewImp {
-    fun PrepareData(listData: ArrayList<Item>)
-    fun CardStackView(listData: List<Item>)
-    fun SlidePanel()
-    fun Reload(listData: List<Item>)
-    fun Rewind()
+    fun prepareData(listData: ArrayList<Item>)
+    fun cardStackView(listData: List<Item>)
+    fun slidePanel()
+    fun reload(listData: List<Item>)
+    fun rewind()
 }
