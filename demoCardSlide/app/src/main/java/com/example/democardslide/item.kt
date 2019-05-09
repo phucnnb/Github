@@ -18,7 +18,7 @@ class Item(private var linkImage: Int, private var title: String, private var su
         return this.title
     }
 
-    fun setSubstance(HoTen : String){
+    fun setSubstance(substance : String){
         this.substance = substance
     }
 
