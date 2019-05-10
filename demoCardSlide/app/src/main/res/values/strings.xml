@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">demoCardSlide</string>
+    <string name="back">back</string>
+    <string name="like">like</string>
+    <string name="dislike">dislike</string>
+    <string name="todo">TODO</string>
 </resources>

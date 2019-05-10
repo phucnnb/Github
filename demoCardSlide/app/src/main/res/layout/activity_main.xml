@@ -35,22 +35,15 @@
                 android:orientation="horizontal"
                 android:clipChildren="false"
                 android:layout_alignParentBottom="true"
-        >
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                <Button
-                        android:id="@+id/btnBack"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/custom_button"
-                        android:text="back"
-                        android:visibility="gone"/>
-            </LinearLayout>
+                android:baselineAligned="false">
+            <Button
+                    android:id="@+id/btnBack"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_button"
+                    android:text="@string/back"
+                    android:visibility="gone"/>
 
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -63,7 +56,7 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:background="@drawable/custom_button"
-                        android:text="like"/>
+                        android:text="@string/like"/>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -76,15 +69,9 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:background="@drawable/custom_button"
-                        android:text="dislike"/>
+                        android:text="@string/dislike"/>
             </LinearLayout>
 
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-            </LinearLayout>
         </LinearLayout>
 
         <com.yuyakaido.android.cardstackview.CardStackView
@@ -100,45 +87,58 @@
 </LinearLayout>
 
 
-    
+
     <!-- SLIDING LAYOUT -->
+
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
+            android:background="#00ffffff"
             android:orientation="vertical"
             android:clickable="true"
-            android:focusable="false"
+            android:focusable="true"
             android:id="@+id/dragView">
+
+
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:orientation="horizontal"
-                android:background="@color/colorAccent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
 
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp"
+                    android:orientation="horizontal"
+                    android:background="@color/colorAccent">
+
+                <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical"/>
+
+            </LinearLayout>
+
+
+            <ImageView
+                    android:id="@+id/imageSlide"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/todo"/>
             <TextView
-                    android:id="@+id/name"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="14sp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"/>
-
+                    android:id="@+id/txtNameSlide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+            android:layout_marginBottom="30dp"/>
         </LinearLayout>
 
-        <ImageView
-                android:id="@+id/imageSlide"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"/>
-        <TextView
-                android:id="@+id/txtNameSlide"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"/>
+
 
         <!--<ScrollView-->
         <!--android:id="@+id/sv"-->

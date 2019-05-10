@@ -48,9 +48,9 @@ class MainActivity : AppCompatActivity(),ViewImp, CardStackListener {
         card_stack_view.adapter = adapterSwipe
     }
 
-    override fun slidePanel(listData: List<Item>, kt: Int) {
-        imageSlide.setImageResource(listData[kt].getLinkImage())
-        txtNameSlide.text = listData[kt].getTitle()
+    override fun slidePanel(listData: List<Item>, check: Int) {
+        imageSlide.setImageResource(listData[check].getLinkImage())
+        txtNameSlide.text = listData[check].getTitle()
     }
 
     override fun reload(listData: List<Item>) {
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(),ViewImp, CardStackListener {
     }
 
     override fun onCardAppeared(view: android.view.View?, position: Int) {
-        Log.d("AAA", "onCardAppeared " + position)
+        Log.d("AAA", "onCardAppeared $position")
         logic.thucHienSlidePanel(position)
     }
 
