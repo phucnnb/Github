@@ -1,5 +1,7 @@
 package com.example.democardslide
 
+import kotlin.collections.ArrayList
+
 
 class PresenterLogic(view: ViewImp) : PresenterImp{
 
@@ -15,7 +17,33 @@ class PresenterLogic(view: ViewImp) : PresenterImp{
         (listData as ArrayList<Item>).add(data2)
         (listData as ArrayList<Item>).add(data3)
         viewImp.prepareData(listData as ArrayList<Item>)
-
+        val your_array_list : List<String> = listOf (
+            "This",
+            "Is",
+            "An",
+            "Example",
+            "ListView",
+            "That",
+            "You",
+            "Can",
+            "Scroll",
+            ".",
+            "It",
+            "Shows",
+            "How",
+            "Any",
+            "Scrollable",
+            "View",
+            "Can",
+            "Be",
+            "Included",
+            "As",
+            "A",
+            "Child",
+            "Of",
+            "SlidingUpPanelLayout"
+        )
+        viewImp.prepareList(your_array_list)
     }
 
     override fun thucHienCardStackView() {
@@ -26,10 +54,12 @@ class PresenterLogic(view: ViewImp) : PresenterImp{
         viewImp.reload(listData)
     }
 
-    override fun thucHienSlidePanel() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun thucHienSlidePanel(check: Int) {
+        viewImp.slidePanel(listData,check)
     }
 
     override fun thucHienRewind() {
+
     }
+
 }
