@@ -3,6 +3,7 @@ package com.example.demorecyclerview
 import android.content.Context
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +20,11 @@ class AdapterAndroid: RecyclerView.Adapter<AdapterAndroid.AndroidHolder>{
     }
 
     fun insertDataNew(listDataNew: ArrayList<Android>){
+        Log.d("CCC",listDataNew.toString())
+        Log.d("CCC",listData.toString())
         var mainDiffUtit = MainDiffUtilCallBack(listData,listDataNew)
         var diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(mainDiffUtit)
-
+        listData.clear()
         listData.addAll(listDataNew)
         diffResult.dispatchUpdatesTo(this)
     }

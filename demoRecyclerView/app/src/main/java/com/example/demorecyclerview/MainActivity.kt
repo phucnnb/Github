@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(),MainView {
     private lateinit var logic: MainPresenter
     private lateinit var adapterAndroid: AdapterAndroid
     private lateinit var actionBar: ActionBar
-    private lateinit var listDataRecyclerView: ArrayList<Android>
+    private lateinit var listData: ArrayList<Android>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,27 +26,40 @@ class MainActivity : AppCompatActivity(),MainView {
         actionBar = this!!.supportActionBar!!
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.title = ""
-
+        logicPrepareData()
         logic = MainPresenter(this,this)
         logic.logicPrepareData()
-        logic.logicAddData()
+
+    }
+
+    fun logicPrepareData() {
+        listData = ArrayList()
+        val a1 = Android("1.5", "Cupcake", "API level 3")
+        val a2 = Android("1.6", "Donut", "API level 4")
+        val a3 = Android("2.0 - 2.1", "Eclair", "API level 5 - 7")
+        val a4 = Android("2.2", "Froyo", "API level 8")
+        val a5 = Android("2.3", "Gingerbread", "API level 9 - 10")
+        listData.add(a1)
+        listData.add(a2)
+        listData.add(a3)
+        listData.add(a4)
+        listData.add(a5)
     }
 
     override fun prepareData(listData: ArrayList<Android>) {
+
         val layoutInflater: RecyclerView.LayoutManager = LinearLayoutManager(this)
         recycler.layoutManager = layoutInflater
         adapterAndroid = AdapterAndroid(listData,this)
         recycler.adapter = adapterAndroid
     }
 
-    override fun putData(listData: ArrayList<Android>) {
-
-    }
-
-    override fun insertData(list: ArrayList<Android>) {
-        Log.d("BBB",list.toString())
+    override fun insertData() {
+        val android = Android("3.0 - 3.2","Honeycomb","API level 11 - 13")
+        listData.add(android)
+        Log.d("BBB",listData.toString())
         Toast.makeText(applicationContext,"Thêm Mới",Toast.LENGTH_SHORT).show()
-        adapterAndroid.insertDataNew(list)
+        adapterAndroid.insertDataNew(listData)
 
         recycler.smoothScrollToPosition(adapterAndroid.itemCount -1)
     }
@@ -63,7 +76,7 @@ class MainActivity : AppCompatActivity(),MainView {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId){
-            R.id.menuInsert -> logic.logicInsertData()
+            R.id.menuInsert -> insertData()
             R.id.menuUpdate -> logic.logicUpdateData()
         }
         return super.onOptionsItemSelected(item)
