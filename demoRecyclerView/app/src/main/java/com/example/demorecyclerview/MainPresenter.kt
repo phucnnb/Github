@@ -27,13 +27,17 @@ class MainPresenter(private var mainView: MainView, private var context: Context
 
     fun logicInsertData(listDataRecyclerView: ArrayList<Android>) {
 
-        val android = Android("3.0 - 3.2","Honeycomb","API level 11 - 13")
-        listDataRecyclerView.add(android)
-        mainView.insertData(listDataRecyclerView)
+
     }
 
     fun logicUpdateData(){
         mainView.updateData()
 
+    }
+
+    fun logicInsertData() {
+        val android = Android("3.0 - 3.2","Honeycomb","API level 11 - 13")
+        listData.add(android)
+        mainView.insertData(listData)
     }
 }

@@ -33,15 +33,14 @@ class MainActivity : AppCompatActivity(),MainView {
     }
 
     override fun prepareData(listData: ArrayList<Android>) {
-        listDataRecyclerView = listData
-        Log.d("AAA",listData.toString())
+        val layoutInflater: RecyclerView.LayoutManager = LinearLayoutManager(this)
+        recycler.layoutManager = layoutInflater
+        adapterAndroid = AdapterAndroid(listData,this)
+        recycler.adapter = adapterAndroid
     }
 
     override fun putData(listData: ArrayList<Android>) {
-       val layoutInflater: RecyclerView.LayoutManager = LinearLayoutManager(this)
-        recycler.layoutManager = layoutInflater
-        adapterAndroid = AdapterAndroid(listDataRecyclerView,this)
-        recycler.adapter = adapterAndroid
+
     }
 
     override fun insertData(list: ArrayList<Android>) {
@@ -64,7 +63,7 @@ class MainActivity : AppCompatActivity(),MainView {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId){
-            R.id.menuInsert -> logic.logicInsertData(listDataRecyclerView)
+            R.id.menuInsert -> logic.logicInsertData()
             R.id.menuUpdate -> logic.logicUpdateData()
         }
         return super.onOptionsItemSelected(item)
