@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(),MainView {
     override fun putData(listData: ArrayList<Android>) {
        val layoutInflater: RecyclerView.LayoutManager = LinearLayoutManager(this)
         recycler.layoutManager = layoutInflater
-        adapterAndroid = AdapterAndroid(listData,this)
+        adapterAndroid = AdapterAndroid(listDataRecyclerView,this)
         recycler.adapter = adapterAndroid
     }
 
