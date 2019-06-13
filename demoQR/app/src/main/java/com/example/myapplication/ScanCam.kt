@@ -8,8 +8,6 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import com.google.zxing.ResultPoint
-import com.google.zxing.integration.android.IntentIntegrator
-import com.google.zxing.integration.android.IntentResult
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.CaptureManager
@@ -21,8 +19,7 @@ import android.app.SearchManager
 class ScanCam : AppCompatActivity() {
 
     lateinit var captureManager: CaptureManager
-    var scanState: Boolean = false
-    var torchState: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
