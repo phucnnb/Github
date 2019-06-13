@@ -5,7 +5,7 @@
     <item
             android:title=""
             app:showAsAction="always"
-            android:icon="@drawable/ic_launcher_foreground">
+            android:icon="@drawable/baseline_phone_android_black_48dp">
         <menu>
             <item
                     android:id="@+id/menuInsert"
