@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(),MainView {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbarTitle)
-        actionBar = this!!.supportActionBar!!
+        actionBar = this.supportActionBar!!
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.title = ""
         logicPrepareData()
