@@ -6,39 +6,37 @@ import android.os.Bundle
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SimpleItemAnimator
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import com.dinuscxj.refresh.RecyclerRefreshLayout
+import com.daimajia.swipe.util.Attributes
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.concurrent.TimeUnit
-import android.support.v7.widget.SimpleItemAnimator
+import kotlinx.android.synthetic.main.activity_main2.*
 
-
-
-class MainActivity : AppCompatActivity(), AdapterStudent.Update {
+class Main2Activity : AppCompatActivity(), Adapter2Student.Update {
 
     private lateinit var listStudent : ArrayList<Student>
-    private lateinit var adapterStudent: AdapterStudent
+    private lateinit var adapterStudent: Adapter2Student
     private lateinit var actionBar: ActionBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main2)
 
-        setSupportActionBar(toolbarTitle)
+        setSupportActionBar(toolbarTitle2)
         actionBar = this.supportActionBar!!
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.title = ""
 
-        (recycler.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+        (recycler2.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
-        refresh_layout.setOnRefreshListener {
+        refresh_layout2.setOnRefreshListener {
             Log.d("AAA","refresh")
             adapterStudent.notifyDataSetChanged()
-           // TimeUnit.MINUTES.sleep(1);
-            recycler.scrollToPosition(listStudent.size - 1)
-            refresh_layout.isRefreshing = false
+            // TimeUnit.MINUTES.sleep(1);
+            recycler2.scrollToPosition(listStudent.size - 1)
+            refresh_layout2.isRefreshing = false
 
         }
 
@@ -46,11 +44,11 @@ class MainActivity : AppCompatActivity(), AdapterStudent.Update {
         prepareListData()
 
         val layoutInflater: RecyclerView.LayoutManager = LinearLayoutManager(this)
-        recycler.layoutManager = layoutInflater
-        adapterStudent = AdapterStudent(this,listStudent)
-        adapterStudent.setListener(this)
-        recycler.adapter = adapterStudent
-
+        recycler2.layoutManager = layoutInflater
+        adapterStudent = Adapter2Student(this,listStudent)
+        adapterStudent.mode = Attributes.Mode.Single
+       // adapterStudent.setListener(this)
+        recycler2.adapter = adapterStudent
     }
 
     private fun prepareListData() {
@@ -67,8 +65,6 @@ class MainActivity : AppCompatActivity(), AdapterStudent.Update {
 
     }
 
-
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_toolbar, menu)
@@ -82,7 +78,7 @@ class MainActivity : AppCompatActivity(), AdapterStudent.Update {
                 //adapterStudent.notifyDataSetChanged()
             }
             R.id.menuUpdate -> {
-                val i = Intent(this,Main2Activity::class.java)
+                val i = Intent(this,MainActivity::class.java)
                 startActivity(i)
             }
 
@@ -94,4 +90,5 @@ class MainActivity : AppCompatActivity(), AdapterStudent.Update {
         adapterStudent.notifyDataSetChanged()
         Log.d("AAA","aaaaaaaaaaaaaaaaaaaaaaaaa")
     }
+
 }

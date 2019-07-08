@@ -15,7 +15,7 @@
             </item>
             <item
                     android:id="@+id/menuUpdate"
-                    android:title="Cập Nhập"
+                    android:title="Chuyển Activity"
             />
         </menu>
 
