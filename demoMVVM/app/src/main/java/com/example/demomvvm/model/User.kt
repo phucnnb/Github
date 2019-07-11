@@ -47,9 +47,5 @@ class User : BaseObservable{
         }else
             Log.d("AAA","BBBBBB")
             return false
-
-
-
-        //
     }
 }

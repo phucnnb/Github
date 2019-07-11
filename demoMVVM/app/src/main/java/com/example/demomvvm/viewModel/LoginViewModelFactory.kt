@@ -6,7 +6,7 @@ import com.example.demomvvm.Interface.LoginResultCallbacks
 
 class LoginViewModelFactory : ViewModelProvider.NewInstanceFactory {
 
-    private lateinit var loginResultCallbacks : LoginResultCallbacks
+    private var loginResultCallbacks : LoginResultCallbacks
 
     constructor(loginResultCallbacks: LoginResultCallbacks) : super() {
         this.loginResultCallbacks = loginResultCallbacks
