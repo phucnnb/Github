@@ -1,5 +1,6 @@
 package com.example.demosensorgryoscope
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.hardware.Sensor
@@ -15,16 +16,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-        lateinit var sensorManager : SensorManager
+        private lateinit var sensorManager : SensorManager
         var kq : Int = 0
+        private lateinit var gyroscopeSensor : Sensor
+        private lateinit var gyroscopeSensorListener : SensorEventListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        val gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+        gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
 
-        val gyroscopeSensorListener = object : SensorEventListener {
+        gyroscopeSensorListener = object : SensorEventListener {
+            @SuppressLint("SetTextI18n")
             override fun onSensorChanged(sensorEvent: SensorEvent) {
                 val x = sensorEvent.values[0]
                 val y = sensorEvent.values[1]
@@ -66,11 +70,18 @@ class MainActivity : AppCompatActivity() {
                 mainHandler.postDelayed(this, 2000)
             }
         })
+    }
 
-// Register the listener
+    override fun onResume() {
+        super.onResume()
         sensorManager.registerListener(
             gyroscopeSensorListener,
             gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL
         )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(gyroscopeSensorListener)
     }
 }
