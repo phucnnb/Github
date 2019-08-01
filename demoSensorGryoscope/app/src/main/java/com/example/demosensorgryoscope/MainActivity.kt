@@ -37,12 +37,10 @@ class MainActivity : AppCompatActivity() {
 
                 when {
                     sensorEvent.values[0] > 2f -> {
-                        // anticlockwise
                         window.decorView.setBackgroundColor(Color.BLUE)
                         kq++
                     }
                     sensorEvent.values[0] < -2f ->{
-                        // anticlockwise
                         window.decorView.setBackgroundColor(Color.YELLOW)
                         kq++
                     }
