@@ -1,9 +1,14 @@
 package com.example.loicuabac2.service.retrofit
 
-class APIUtils {
-    val url = "http://ebook.xsolution.vn/loicuabac/"
+import com.example.loicuabac2.Constants
 
-    fun getData(): DataClient {
-        return RetrofitClient.RetrofitgetClient.getClient(url).create(DataClient::class.java)
+class APIUtils {
+
+
+    object data{
+        fun getData(): DataClient {
+            return RetrofitClient.RetrofitgetClient.getClient(Constants.URL_SERVER).create(DataClient::class.java)
+        }
     }
+
 }

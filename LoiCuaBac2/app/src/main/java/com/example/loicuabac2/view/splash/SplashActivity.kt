@@ -16,7 +16,6 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed({
-            Toast.makeText(applicationContext,"haha",Toast.LENGTH_SHORT).show()
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         },Constants.SPLASH_TIME)
