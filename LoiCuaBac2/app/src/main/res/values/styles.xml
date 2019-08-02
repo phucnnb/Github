@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="colorMenu" parent="AppTheme">
+        <item name="drawerArrowStyle">@style/drawertoogle</item>
+    </style>
+
+    <style name="drawertoogle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">#FFF</item>
+    </style>
+
+    <style name="ToolbarColored" parent="AppTheme">
+        <item name="android:textColorSecondary">#FFF</item>
+    </style>
+
 </resources>
