@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                                        xmlns:tools="http://schemas.android.com/tools"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        tools:context=".view.main.MainActivity"
-                                        android:id="@+id/drawerLayout">
+<android.support.v4.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.main.MainActivity"
+        android:id="@+id/drawerLayout">
     <FrameLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
@@ -18,17 +19,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:background="@color/colorPrimary"
-                    app:theme="@style/colorMenu"
-            >
-
+                    app:theme="@style/colorMenu">
                 <TextView
                         android:id="@+id/txtTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="LỜI CỦA BÁC"
+                        android:text="@string/title"
                         android:textColor="#FFF"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
@@ -36,9 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="56dp">
+                android:layout_marginTop="56dp">1
                 <!--android:background="@drawable/anh_nen"-->
-
 
             <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerTruyen"
@@ -47,7 +45,6 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp"
                     android:clipToPadding="false">
-
             </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
@@ -59,48 +56,36 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:headerLayout="@layout/header_drawer_layout">
-
-
-
         <LinearLayout
                 android:layout_marginTop="190dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-        >
-
-
-
+                android:orientation="vertical">
             <ExpandableListView
                     android:id="@+id/lvExp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-
             </ExpandableListView>
-            <Button
 
-                    android:id="@+id/btnOffline"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Truyện Offline"
-                    android:gravity="left|center_vertical"
-                    android:textSize="17dp"
-                    android:background="@drawable/custom_gioithieu"
-                    android:paddingLeft="16dp"
-            />
+            <!--<Button-->
+                    <!--android:id="@+id/btnOffline"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Truyện Offline"-->
+                    <!--android:gravity="left|center_vertical"-->
+                    <!--android:textSize="17dp"-->
+                    <!--android:background="@drawable/custom_gioithieu"-->
+                    <!--android:paddingLeft="16dp"/>-->
 
-            <Button
-
-                    android:id="@+id/btnGioiThieu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="GIỚI THIỆU"
-                    android:gravity="left|center_vertical"
-                    android:textSize="17dp"
-                    android:background="@drawable/custom_gioithieu"
-                    android:paddingLeft="16dp"
-            />
+            <!--<Button-->
+                    <!--android:id="@+id/btnGioiThieu"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="GIỚI THIỆU"-->
+                    <!--android:gravity="left|center_vertical"-->
+                    <!--android:textSize="17dp"-->
+                    <!--android:background="@drawable/custom_gioithieu"-->
+                    <!--android:paddingLeft="16dp"/>-->
         </LinearLayout>
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>
