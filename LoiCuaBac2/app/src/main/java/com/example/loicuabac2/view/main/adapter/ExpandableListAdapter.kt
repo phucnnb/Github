@@ -17,11 +17,11 @@ class ExpandableListAdapter(
     }
 
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return true
     }
 
     override fun hasStableIds(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+      return false
     }
 
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup?): View {
@@ -29,15 +29,15 @@ class ExpandableListAdapter(
     }
 
     override fun getChildrenCount(groupPosition: Int): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return listChild[listHeader[groupPosition]]?.size!!
     }
 
     override fun getChild(groupPosition: Int, childPosition: Int): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       return listChild[listHeader[groupPosition]]?.get(childPosition)!!
     }
 
     override fun getGroupId(groupPosition: Int): Long {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+         return groupPosition.toLong()
     }
 
     override fun getChildView(
@@ -51,10 +51,10 @@ class ExpandableListAdapter(
     }
 
     override fun getChildId(groupPosition: Int, childPosition: Int): Long {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       return childPosition.toLong()
     }
 
     override fun getGroupCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return listHeader.size
     }
 }
