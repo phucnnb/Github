@@ -3,4 +3,6 @@
     <string name="title">LỜI CỦA BÁC</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="wifi_data">WifiData</string>
+    <string name="modile_data">MobileData></string>
 </resources>
