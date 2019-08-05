@@ -16,30 +16,25 @@ import com.example.loicuabac2.service.retrofit.DataClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.HashMap
 import com.example.loicuabac2.R
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class MainPresenter(private var viewMain: MainView) : LifecycleOwner {
-
-
-    override fun getLifecycle(): Lifecycle {
-        Log.d("baophuc","aaaa")
-        return lifecycle
-    }
+class MainPresenter(private var viewMain: MainView) {
 
     fun  logicCheckInternet(context: Context){
         val connectionLiveData = ConnectionLiveData(context)
-        connectionLiveData.observe(this, object : Observer<ConnectionModel>{
+        connectionLiveData.observe(context as LifecycleOwner, object : Observer<ConnectionModel>{
             override fun onChanged(t: ConnectionModel?) {
                 if (t != null) {
                     if (t.isConnrcted) {
                         when (t.type) {
-                            R.string.wifi_data -> viewMain.checkInternet("Wifi turned ON")
-                            R.string.modile_data -> viewMain.checkInternet("Mobile data turned ON")
+                            R.string.wifi_data -> viewMain.checkInternet(R.string.connected_wifi_data,true)
+                            R.string.modile_data -> viewMain.checkInternet(R.string.connected_mobile_data,true)
                         }
                     } else {
-                        viewMain.checkInternet("Connection turned OFF")
+                        viewMain.checkInternet(R.string.disconnect,false)
                     }
                 }
             }
@@ -66,7 +61,7 @@ class MainPresenter(private var viewMain: MainView) : LifecycleOwner {
                 }
             }
             override fun onFailure(call: Call<List<MainMenu>>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                Log.d("AAA",t.toString())
             }
 
         })

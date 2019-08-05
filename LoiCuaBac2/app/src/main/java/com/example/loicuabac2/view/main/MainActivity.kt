@@ -25,12 +25,8 @@ class MainActivity : AppCompatActivity(), MainView {
 
         logic = MainPresenter(this)
         logic.logicCheckInternet(this)
+        logic.logicPrepareDataMenu()
         setDrawerLayout()
-        txtTitle.setOnClickListener {
-            adapterExpandable.deleteItem()
-            adapterExpandable.notifyDataSetChanged()
-        }
-
     }
 
     private fun setDrawerLayout() {
@@ -41,7 +37,6 @@ class MainActivity : AppCompatActivity(), MainView {
 
         val actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         actionBarDrawerToggle.syncState()
-
         toolbar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
@@ -49,24 +44,20 @@ class MainActivity : AppCompatActivity(), MainView {
         lvExp.setGroupIndicator(null)
         lvExp.setIndicatorBounds(lvExp.left - 0, lvExp.width)
 
-        logic.logicPrepareDataMenu()
     }
 
-    override fun checkInternet(mes: String) {
+    override fun checkInternet(mes: Int,check : Boolean) {
+        if(check){
+            logic.logicPrepareDataMenu()
+        }
         Toast.makeText(applicationContext,mes,Toast.LENGTH_SHORT).show()
     }
 
-
     override fun prepareDataMenu(listHeader: ArrayList<String>, listChild: HashMap<String, List<String>>) {
-
         listDataChild = listChild
         listDataHeader =listHeader
         adapterExpandable = ExpandableListAdapter(this,listDataHeader,listDataChild)
-
         adapterExpandable.notifyDataSetChanged()
         lvExp.setAdapter(adapterExpandable)
-
-
-
     }
 }

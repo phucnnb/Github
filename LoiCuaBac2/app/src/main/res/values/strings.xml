@@ -3,6 +3,11 @@
     <string name="title">LỜI CỦA BÁC</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+
     <string name="wifi_data">WifiData</string>
     <string name="modile_data">MobileData></string>
+    <string name="connected_wifi_data">Wifi turned ON</string>
+    <string name="connected_mobile_data">Mobile data turned ON</string>
+    <string name="disconnect">Connection turned OFF</string>
+
 </resources>
