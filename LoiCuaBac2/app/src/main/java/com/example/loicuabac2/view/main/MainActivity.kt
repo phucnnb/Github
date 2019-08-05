@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import android.widget.ExpandableListView
 import android.widget.Toast
 import com.example.loicuabac2.R
@@ -50,6 +51,14 @@ class MainActivity : AppCompatActivity(), MainView {
         lvExp.setGroupIndicator(null)
         lvExp.setIndicatorBounds(lvExp.left - 0, lvExp.width)
 
+        lvExp.setOnChildClickListener { expandableListView, view, groupPosition, childPosition, l ->
+            Toast.makeText(
+                applicationContext,
+                listDataHeader[groupPosition]
+                        + " : "
+                        + listDataChild[listDataHeader[groupPosition]]!![childPosition],
+                Toast.LENGTH_SHORT).show()
+            false}
         val title1 : OfflineMenu = OfflineMenu("Truyện Offline")
         val title2 : OfflineMenu = OfflineMenu("Giới Thiệu")
         listDataOffline.add(title1)
@@ -58,6 +67,8 @@ class MainActivity : AppCompatActivity(), MainView {
         recyclerOffline.layoutManager = layoutManager
         adapterOfflineMenu = OfflineMenuAdapter(this, listDataOffline)
         recyclerOffline.adapter = adapterOfflineMenu
+
+
     }
 
     override fun checkInternet(mes: Int,check : Boolean) {
