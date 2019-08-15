@@ -1,10 +1,8 @@
 package com.example.loicuabac2.view.main
 
-import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.content.Context
-import android.database.Observable
 import android.util.Log
 import com.example.loicuabac2.entity.ChildMenu
 import com.example.loicuabac2.entity.ConnectionModel
@@ -43,7 +41,6 @@ class MainPresenter(private var viewMain: MainView) {
 
 
     fun logicPrepareDataMenu(){
-        val listDataHeader : ArrayList<String> = ArrayList()
         var listMainMenu : ArrayList<MainMenu> = ArrayList()
 
         val dataClient : DataClient = APIUtils.data.getData()
@@ -54,10 +51,7 @@ class MainPresenter(private var viewMain: MainView) {
              listMainMenu = response.body() as ArrayList<MainMenu>
 
                 if (listMainMenu.size > 0){
-                    for ( a in 0 until listMainMenu.size){
-                        listDataHeader.add(listMainMenu[a].tenMenu)
-                    }
-                    prepareChildMenu(listMainMenu,listDataHeader)
+                    viewMain.prepareDataMenu(listMainMenu)
                 }
             }
             override fun onFailure(call: Call<List<MainMenu>>, t: Throwable) {
@@ -89,7 +83,7 @@ class MainPresenter(private var viewMain: MainView) {
                     }
                     listDataChild[listDataHeader[c]] = listChild
                     if (c == (listMainMenu.size-1)){
-                        viewMain.prepareDataMenu(listDataHeader,listDataChild)
+                        //viewMain.prepareDataMenu(listDataHeader,listDataChild)
                     }
                 }
             })

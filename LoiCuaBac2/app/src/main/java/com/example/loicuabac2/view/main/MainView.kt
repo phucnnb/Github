@@ -1,12 +1,9 @@
 package com.example.loicuabac2.view.main
 
-import java.util.HashMap
+import com.example.loicuabac2.entity.MainMenu
 
 interface MainView {
     fun checkInternet(mes : Int, check : Boolean)
-    fun prepareDataMenu(
-        listDataHeader: ArrayList<String>,
-        listDataChild: HashMap<String, List<String>>
-    )
+    fun prepareDataMenu(listDataMenu: ArrayList<MainMenu>)
 
 }

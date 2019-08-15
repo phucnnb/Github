@@ -6,25 +6,17 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
-import android.view.View
-import android.widget.ExpandableListView
 import android.widget.Toast
 import com.example.loicuabac2.R
-import com.example.loicuabac2.entity.OfflineMenu
-import com.example.loicuabac2.view.main.adapter.ExpandableListAdapter
-import com.example.loicuabac2.view.main.adapter.OfflineMenuAdapter
+import com.example.loicuabac2.entity.MainMenu
+import com.example.loicuabac2.view.main.adapter.MainMenuAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.HashMap
 
 class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var logic: MainPresenter
-    private lateinit var adapterExpandable : ExpandableListAdapter
-    private var listDataHeader : ArrayList<String> = ArrayList()
-    private var listDataChild : HashMap<String, List<String>> = HashMap()
-    private var listDataOffline : ArrayList<OfflineMenu> = ArrayList()
-    private lateinit var adapterOfflineMenu : OfflineMenuAdapter
+    private var listMainMenu : ArrayList<MainMenu> = ArrayList()
+    private lateinit var adapterMainMenu : MainMenuAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,38 +43,24 @@ class MainActivity : AppCompatActivity(), MainView {
         lvExp.setGroupIndicator(null)
         lvExp.setIndicatorBounds(lvExp.left - 0, lvExp.width)
 
-        lvExp.setOnChildClickListener { expandableListView, view, groupPosition, childPosition, l ->
-            Toast.makeText(
-                applicationContext,
-                listDataHeader[groupPosition]
-                        + " : "
-                        + listDataChild[listDataHeader[groupPosition]]!![childPosition],
-                Toast.LENGTH_SHORT).show()
-            false}
-        val title1 : OfflineMenu = OfflineMenu("Truyện Offline")
-        val title2 : OfflineMenu = OfflineMenu("Giới Thiệu")
-        listDataOffline.add(title1)
-        listDataOffline.add(title2)
         val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this)
         recyclerOffline.layoutManager = layoutManager
-        adapterOfflineMenu = OfflineMenuAdapter(this, listDataOffline)
-        recyclerOffline.adapter = adapterOfflineMenu
-
-
+        adapterMainMenu = MainMenuAdapter(this, listMainMenu)
+        recyclerOffline.adapter = adapterMainMenu
     }
 
     override fun checkInternet(mes: Int,check : Boolean) {
         if(check){
-            logic.logicPrepareDataMenu()
+
         }
         Toast.makeText(applicationContext,mes,Toast.LENGTH_SHORT).show()
     }
 
-    override fun prepareDataMenu(listHeader: ArrayList<String>, listChild: HashMap<String, List<String>>) {
-        listDataChild = listChild
-        listDataHeader =listHeader
-        adapterExpandable = ExpandableListAdapter(this,listDataHeader,listDataChild)
-        adapterExpandable.notifyDataSetChanged()
-        lvExp.setAdapter(adapterExpandable)
+    override fun prepareDataMenu(listDataMenu: ArrayList<MainMenu>) {
+        listMainMenu.add(MainMenu("8","Giới Thiệu"))
+        listMainMenu.addAll(listDataMenu)
+        listMainMenu.add(MainMenu("9","Truyện Đã Tải"))
+
+        adapterMainMenu.notifyDataSetChanged()
     }
 }
