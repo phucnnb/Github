@@ -12,7 +12,7 @@ import com.example.loicuabac2.entity.MainMenu
 import com.example.loicuabac2.view.main.adapter.MainMenuAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.onClick {
 
     private lateinit var logic: MainPresenter
     private var listMainMenu : ArrayList<MainMenu> = ArrayList()
@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity(), MainView {
         val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this)
         recyclerOffline.layoutManager = layoutManager
         adapterMainMenu = MainMenuAdapter(this, listMainMenu)
+        adapterMainMenu.setListener(this)
         recyclerOffline.adapter = adapterMainMenu
     }
 
@@ -62,5 +63,9 @@ class MainActivity : AppCompatActivity(), MainView {
         listMainMenu.add(MainMenu("9","Truyện Đã Tải"))
 
         adapterMainMenu.notifyDataSetChanged()
+    }
+
+    override fun listenClickItem(id: String) {
+        Toast.makeText(applicationContext,id,Toast.LENGTH_SHORT).show()
     }
 }
