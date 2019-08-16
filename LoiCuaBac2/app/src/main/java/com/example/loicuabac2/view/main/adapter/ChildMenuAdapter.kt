@@ -15,7 +15,7 @@ class ChildMenuAdapter(private var contexxt: Context?, private var childs: Array
 
     override fun onBindViewHolder(p0: ChildMenuHolder, p1: Int) {
         val childMenu = childs?.get(p1)
-        p0.txtTitleChild.text = childMenu.toString()
+        p0.txtTitleChild.text = childMenu!!.child
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ChildMenuHolder {

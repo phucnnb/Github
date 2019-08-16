@@ -98,5 +98,6 @@ class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.OnClickMenu 
 
     override fun listenClickItem(id: String) {
         logic.logicPrepareDataChildMenu(id)
+        drawerLayout.closeDrawer(GravityCompat.START)
     }
 }
