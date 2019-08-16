@@ -12,6 +12,7 @@ import android.widget.TextView
 import com.example.loicuabac2.Constants
 import com.example.loicuabac2.R
 import com.example.loicuabac2.entity.ChildMenu
+import com.example.loicuabac2.view.category.CategoryActivity
 import com.example.loicuabac2.view.music.MusicActivity
 import com.example.loicuabac2.view.readstory.ReadStoryActivity
 import java.text.Normalizer
@@ -33,7 +34,7 @@ class ChildMenuAdapter(private var context: Context?, private var childs: ArrayL
                 intent = Intent(context,MusicActivity::class.java)
                 intent.putExtra(Constants.SPECIES_CHILD_MENU,idChildMenu)
             } else {
-                intent = Intent(context,ReadStoryActivity::class.java)
+                intent = Intent(context,CategoryActivity::class.java)
                 intent.putExtra(Constants.SPECIES_CHILD_MENU,idChildMenu)
             }
 
