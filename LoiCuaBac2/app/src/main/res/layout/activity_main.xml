@@ -39,7 +39,7 @@
                 <!--android:background="@drawable/anh_nen"-->
 
             <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerTruyen"
+                    android:id="@+id/recyclerChildMenu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginRight="16dp"
@@ -61,38 +61,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-            <ExpandableListView
-                    android:id="@+id/lvExp"
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerMainMenu"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:layout_constraintTop_toTopOf="parent">
-            </ExpandableListView>
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerOffline"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintTop_toBottomOf="@id/lvExp">
             </android.support.v7.widget.RecyclerView>
 
-            <!--<Button-->
-                    <!--android:id="@+id/btnOffline"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Truyện Offline"-->
-                    <!--android:gravity="left|center_vertical"-->
-                    <!--android:textSize="17dp"-->
-                    <!--android:background="@drawable/custom_gioithieu"-->
-                    <!--android:paddingLeft="16dp"/>-->
 
-            <!--<Button-->
-                    <!--android:id="@+id/btnGioiThieu"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="GIỚI THIỆU"-->
-                    <!--android:gravity="left|center_vertical"-->
-                    <!--android:textSize="17dp"-->
-                    <!--android:background="@drawable/custom_gioithieu"-->
-                    <!--android:paddingLeft="16dp"/>-->
         </android.support.constraint.ConstraintLayout>
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

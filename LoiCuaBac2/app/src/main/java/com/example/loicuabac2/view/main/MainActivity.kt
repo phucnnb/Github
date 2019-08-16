@@ -6,17 +6,22 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.widget.Toast
 import com.example.loicuabac2.R
+import com.example.loicuabac2.entity.ChildMenu
 import com.example.loicuabac2.entity.MainMenu
+import com.example.loicuabac2.view.main.adapter.ChildMenuAdapter
 import com.example.loicuabac2.view.main.adapter.MainMenuAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.onClick {
+class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.OnClickMenu {
 
     private lateinit var logic: MainPresenter
     private var listMainMenu : ArrayList<MainMenu> = ArrayList()
+    private var listChildMenu : ArrayList<ChildMenu> = ArrayList()
     private lateinit var adapterMainMenu : MainMenuAdapter
+    private lateinit var adapterChildMenu : ChildMenuAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +29,16 @@ class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.onClick {
 
         logic = MainPresenter(this)
         logic.logicCheckInternet(this)
-        logic.logicPrepareDataMenu()
+        logic.logicPrepareDataMainMenu()
         setDrawerLayout()
+        setChildMenu()
+    }
+
+    private fun setChildMenu() {
+        val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this)
+        recyclerChildMenu.layoutManager = layoutManager
+        adapterChildMenu = ChildMenuAdapter(this, listChildMenu)
+        recyclerChildMenu.adapter = adapterChildMenu
     }
 
     private fun setDrawerLayout() {
@@ -40,32 +53,50 @@ class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.onClick {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        lvExp.setGroupIndicator(null)
-        lvExp.setIndicatorBounds(lvExp.left - 0, lvExp.width)
-
         val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this)
-        recyclerOffline.layoutManager = layoutManager
+        recyclerMainMenu.layoutManager = layoutManager
         adapterMainMenu = MainMenuAdapter(this, listMainMenu)
         adapterMainMenu.setListener(this)
-        recyclerOffline.adapter = adapterMainMenu
+        recyclerMainMenu.adapter = adapterMainMenu
     }
 
     override fun checkInternet(mes: Int,check : Boolean) {
-        if(check){
+        if (check) {
+            if (listMainMenu.size == 2) {
+                listMainMenu.clear()
+                logic.logicPrepareDataMainMenu()
+                Toast.makeText(applicationContext,mes,Toast.LENGTH_SHORT).show()
+            }
+
+        } else {
+            if(listMainMenu.size > 2 || listMainMenu.size == 0) {
+                listMainMenu.clear()
+                listMainMenu.add(MainMenu("5","Giới Thiệu"))
+                listMainMenu.add(MainMenu("6","Truyện Đã Tải"))
+                adapterMainMenu.notifyDataSetChanged()
+                Toast.makeText(applicationContext,mes,Toast.LENGTH_SHORT).show()
+            }
 
         }
-        Toast.makeText(applicationContext,mes,Toast.LENGTH_SHORT).show()
+
     }
 
-    override fun prepareDataMenu(listDataMenu: ArrayList<MainMenu>) {
-        listMainMenu.add(MainMenu("8","Giới Thiệu"))
+    override fun prepareDataMainMenu(listDataMenu: ArrayList<MainMenu>) {
+        listMainMenu.add(MainMenu("5","Giới Thiệu"))
         listMainMenu.addAll(listDataMenu)
-        listMainMenu.add(MainMenu("9","Truyện Đã Tải"))
+        listMainMenu.add(MainMenu("6","Truyện Đã Tải"))
 
         adapterMainMenu.notifyDataSetChanged()
     }
 
+    override fun prepareDataChildMenu(listDataChildMenu: ArrayList<ChildMenu>) {
+        listChildMenu.clear()
+        listChildMenu.addAll(listDataChildMenu)
+
+        adapterChildMenu.notifyDataSetChanged()
+    }
+
     override fun listenClickItem(id: String) {
-        Toast.makeText(applicationContext,id,Toast.LENGTH_SHORT).show()
+        logic.logicPrepareDataChildMenu(id)
     }
 }

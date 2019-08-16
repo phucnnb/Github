@@ -14,7 +14,7 @@ import com.example.loicuabac2.entity.MainMenu
 class MainMenuAdapter(private var contexxt: Context?, private var titles: ArrayList<MainMenu>?) :
     RecyclerView.Adapter<MainMenuHolder>() {
 
-    private var listener : onClick? = null
+    private var listener : OnClickMenu? = null
 
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MainMenuHolder {
@@ -41,11 +41,11 @@ class MainMenuAdapter(private var contexxt: Context?, private var titles: ArrayL
         var itemMenu : LinearLayout = itemView!!.findViewById(R.id.itemMenu)
     }
 
-    interface onClick{
+    interface OnClickMenu{
         fun listenClickItem(id: String)
     }
 
-    fun setListener(listener: onClick) {
+    fun setListener(listener: OnClickMenu) {
         this.listener = listener
     }
 

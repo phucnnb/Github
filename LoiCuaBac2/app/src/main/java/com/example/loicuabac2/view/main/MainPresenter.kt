@@ -40,7 +40,7 @@ class MainPresenter(private var viewMain: MainView) {
     }
 
 
-    fun logicPrepareDataMenu(){
+    fun logicPrepareDataMainMenu(){
         var listMainMenu : ArrayList<MainMenu> = ArrayList()
 
         val dataClient : DataClient = APIUtils.data.getData()
@@ -48,10 +48,10 @@ class MainPresenter(private var viewMain: MainView) {
 
         callMainMenu.enqueue(object : Callback<List<MainMenu>> {
             override fun onResponse(call: Call<List<MainMenu>>, response: Response<List<MainMenu>>) {
-             listMainMenu = response.body() as ArrayList<MainMenu>
+                listMainMenu = response.body() as ArrayList<MainMenu>
 
-                if (listMainMenu.size > 0){
-                    viewMain.prepareDataMenu(listMainMenu)
+                if (listMainMenu.size > 0) {
+                    viewMain.prepareDataMainMenu(listMainMenu)
                 }
             }
             override fun onFailure(call: Call<List<MainMenu>>, t: Throwable) {
@@ -61,40 +61,68 @@ class MainPresenter(private var viewMain: MainView) {
         })
     }
 
-    private fun prepareChildMenu(listMainMenu: ArrayList<MainMenu>, listDataHeader: ArrayList<String>) {
-
-        val dataClient : DataClient = APIUtils.data.getData()
+    fun logicPrepareDataChildMenu(id: String) {
         var listChildMenu : ArrayList<ChildMenu>
-        val listDataChild : HashMap<String, List<String>> = HashMap()
+        val dataClient : DataClient = APIUtils.data.getData()
+        when(id) {
+            "5" -> Log.d("baophuc","Giới Thiệu")
+            "6" -> Log.d("baophuc","Offline")
 
-
-        for (c in 0 until listMainMenu.size){
-            val callChildMenu : Call<List<ChildMenu>> = dataClient.childMenu(listMainMenu.get(c).id)
-            callChildMenu.enqueue(object : Callback<List<ChildMenu>>{
-                override fun onFailure(call: Call<List<ChildMenu>>, t: Throwable) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onResponse(call: Call<List<ChildMenu>>, response: Response<List<ChildMenu>>) {
-                    listChildMenu = response.body() as ArrayList<ChildMenu>
-                    val listChild : ArrayList<String> = ArrayList()
-                    for (b in 0 until listChildMenu.size){
-                        listChild.add(listChildMenu.get(b).child)
+            else -> {
+                val callChildMenu : Call<List<ChildMenu>> = dataClient.childMenu(id)
+                callChildMenu.enqueue(object : Callback<List<ChildMenu>> {
+                    override fun onFailure(call: Call<List<ChildMenu>>, t: Throwable) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
-                    listDataChild[listDataHeader[c]] = listChild
-                    if (c == (listMainMenu.size-1)){
-                        //viewMain.prepareDataMenu(listDataHeader,listDataChild)
+
+                    override fun onResponse(call: Call<List<ChildMenu>>, response: Response<List<ChildMenu>>) {
+                        listChildMenu = response.body() as ArrayList<ChildMenu>
+
+                        if (listChildMenu.size > 0) {
+                            viewMain.prepareDataChildMenu(listChildMenu)
+                        }
                     }
-                }
-            })
-            try {
-                Thread.sleep(50)
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
+
+                })
             }
-
         }
+
     }
+
+//    fun logicPrepareDataMenu(listMainMenu: ArrayList<MainMenu>, listDataHeader: ArrayList<String>) {
+//
+//        val dataClient : DataClient = APIUtils.data.getData()
+//
+//        val listDataChild : HashMap<String, List<String>> = HashMap()
+//
+//
+//        for (c in 0 until listMainMenu.size){
+//            val callChildMenu : Call<List<ChildMenu>> = dataClient.childMenu(listMainMenu.get(c).id)
+//            callChildMenu.enqueue(object : Callback<List<ChildMenu>>{
+//                override fun onFailure(call: Call<List<ChildMenu>>, t: Throwable) {
+//                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//                }
+//
+//                override fun onResponse(call: Call<List<ChildMenu>>, response: Response<List<ChildMenu>>) {
+//                    listChildMenu = response.body() as ArrayList<ChildMenu>
+//                    val listChild : ArrayList<String> = ArrayList()
+//                    for (b in 0 until listChildMenu.size){
+//                        listChild.add(listChildMenu.get(b).child)
+//                    }
+//                    listDataChild[listDataHeader[c]] = listChild
+//                    if (c == (listMainMenu.size-1)){
+//                        //viewMain.prepareDataMenu(listDataHeader,listDataChild)
+//                    }
+//                }
+//            })
+//            try {
+//                Thread.sleep(50)
+//            } catch (e: InterruptedException) {
+//                e.printStackTrace()
+//            }
+//
+//        }
+//    }
 
     /*fun logicPrepareDataMenu(){
         val listDataHeader : ArrayList<String> = ArrayList()
