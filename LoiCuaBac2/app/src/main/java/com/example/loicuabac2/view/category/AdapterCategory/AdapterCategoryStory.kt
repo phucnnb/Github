@@ -1,0 +1,37 @@
+package com.example.loicuabac2.view.category.AdapterCategory
+
+import android.content.Context
+import android.support.v7.widget.CardView
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import com.example.loicuabac2.R
+import com.example.loicuabac2.entity.CategoryStory
+
+class AdapterCategoryStory (private var context: Context?, private var storys: ArrayList<CategoryStory>?):
+                    RecyclerView.Adapter<AdapterCategoryStory.CategoryHolder>(){
+
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CategoryHolder {
+        val layoutInflater : LayoutInflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val itemView = layoutInflater.inflate(R.layout.item_category_adapter_story,p0,false)
+        return CategoryHolder(itemView)
+    }
+
+    override fun getItemCount(): Int {
+        return storys?.size!!
+    }
+
+    override fun onBindViewHolder(p0 : CategoryHolder, p1 : Int) {
+        val storyCategory = storys?.get(p1)
+        p0.txtStory.text = storyCategory!!.tentruyen
+    }
+
+    class CategoryHolder
+        (itemView : View?) : RecyclerView.ViewHolder(itemView!!){
+            var cardStory : CardView = itemView!!.findViewById(R.id.cardStory)
+            var txtStory : TextView = itemView!!.findViewById(R.id.txtStory)
+    }
+
+}

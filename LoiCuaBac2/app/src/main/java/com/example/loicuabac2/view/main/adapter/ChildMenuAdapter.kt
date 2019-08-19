@@ -28,7 +28,6 @@ class ChildMenuAdapter(private var context: Context?, private var childs: ArrayL
 
         p0.itemChild.setOnClickListener {
             val idChildMenu = removeAccent(childMenu!!.child)
-            Log.d("baophuc", idChildMenu)
             var intent : Intent? = null
 
             if (idChildMenu == context!!.getString(R.string.am_nhac)) {

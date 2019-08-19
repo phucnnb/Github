@@ -2,15 +2,26 @@ package com.example.loicuabac2.view.category
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.example.loicuabac2.Constants
 import com.example.loicuabac2.R
+import com.example.loicuabac2.entity.CategoryImage
+import com.example.loicuabac2.entity.CategoryStory
 import com.example.loicuabac2.service.download.DownloadInterface
+import com.example.loicuabac2.view.category.AdapterCategory.AdapterCategoryImage
+import com.example.loicuabac2.view.category.AdapterCategory.AdapterCategoryStory
+import kotlinx.android.synthetic.main.activity_category.*
 
 class CategoryActivity : AppCompatActivity(), CategoryView, DownloadInterface{
 
     private var species : String = ""
     private lateinit var logic : CategoryPresenter
+    private lateinit var adapterCategoryStory : AdapterCategoryStory
+    private lateinit var adapterCategoryImage : AdapterCategoryImage
+    private var listStory : ArrayList<CategoryStory> = ArrayList()
+    private var listImage : ArrayList<CategoryImage> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,15 +29,31 @@ class CategoryActivity : AppCompatActivity(), CategoryView, DownloadInterface{
 
         if (intent.getStringExtra(Constants.SPECIES_CHILD_MENU) != null) {
             species = intent.getStringExtra(Constants.SPECIES_CHILD_MENU)
-            Log.d("baophuc", species + " 1111111111")
         }
-
-        Log.d("baophuc", species + " 1111111111")
-
         logic = CategoryPresenter(this,this,this)
         logic.logicCheckSpecies(species)
+        val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this)
+        recyclerCatetory.layoutManager = layoutManager
+        adapterCategoryStory = AdapterCategoryStory(this, listStory)
+        adapterCategoryImage = AdapterCategoryImage(this,listImage)
 
 
+
+
+    }
+
+    override fun updateCategoryStory(listCategoryStory: ArrayList<CategoryStory>) {
+        recyclerCatetory.adapter = adapterCategoryStory
+        listStory.clear()
+        listStory.addAll(listCategoryStory)
+        adapterCategoryStory.notifyDataSetChanged()
+    }
+
+    override fun updateCategoryImage(listCategoryImage: ArrayList<CategoryImage>) {
+        recyclerCatetory.adapter = adapterCategoryImage
+        listImage.clear()
+        listImage.addAll(listCategoryImage)
+        adapterCategoryImage.notifyDataSetChanged()
     }
 
     override fun getStringFormUrl(s: String) {

@@ -1,5 +1,7 @@
 package com.example.loicuabac2.service.retrofit
 
+import com.example.loicuabac2.entity.CategoryImage
+import com.example.loicuabac2.entity.CategoryStory
 import com.example.loicuabac2.entity.ChildMenu
 import com.example.loicuabac2.entity.MainMenu
 import retrofit2.Call
@@ -16,11 +18,11 @@ interface DataClient {
     @POST("php/childmenu.php")
     fun childMenu(@Field("idMenu") idMenu: String): Call<List<ChildMenu>>
 
-   /* @FormUrlEncoded
+    @FormUrlEncoded
     @POST("php/loadhinhanhloadmore.php")
-    abstract fun hinhanh(@Field("phanloai") phanloai: String, @Field("code") code: Int): Call<List<HinhAnh>>
+    fun image(@Field("phanloai") phanloai: String, @Field("code") code: Int): Call<List<CategoryImage>>
 
     @FormUrlEncoded
     @POST("php/loadtruyenloadmore.php")
-    abstract fun truyen(@Field("phanloai") phanloai: String, @Field("code") code: Int): Call<List<Truyen>>*/
+    fun story(@Field("phanloai") phanloai: String, @Field("code") code: Int): Call<List<CategoryStory>>
 }
