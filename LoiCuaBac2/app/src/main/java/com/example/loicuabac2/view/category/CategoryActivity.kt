@@ -36,10 +36,6 @@ class CategoryActivity : AppCompatActivity(), CategoryView, DownloadInterface{
         recyclerCatetory.layoutManager = layoutManager
         adapterCategoryStory = AdapterCategoryStory(this, listStory)
         adapterCategoryImage = AdapterCategoryImage(this,listImage)
-
-
-
-
     }
 
     override fun updateCategoryStory(listCategoryStory: ArrayList<CategoryStory>) {
