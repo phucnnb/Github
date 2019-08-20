@@ -16,12 +16,34 @@ import retrofit2.Response
 
 class CategoryPresenter (private var categoryView: CategoryView, private var context: Context, private var downloadInterface: DownloadInterface) {
 
+    private var idSpecies : Int = 0
+    private var isLoaded : Boolean = false
+
+    fun logicLoadMore(totalItem : Int, seemItem : Int, species : String) {
+        val itemLoadTruoc : Int
+        when (idSpecies) {
+            1 -> {
+                itemLoadTruoc = 7
+                if (!isLoaded && totalItem <= seemItem + itemLoadTruoc) {
+                    isLoaded = true
+                    getDataStory(species, totalItem)
+                }
+            }
+            2 -> {
+                itemLoadTruoc = 2
+                if (!isLoaded && totalItem <= seemItem + itemLoadTruoc) {
+                    isLoaded = true
+                    getImage(species, totalItem)
+                }
+            }
+        }
+
+    }
+
     fun logicCheckSpecies(species : String) {
-        Log.d("baophuc",Constants.URL_SPECIES + species + " 00000000000000")
         val download = DownloadData (downloadInterface, Constants.URL_SPECIES + species)
         download.execute()
-        val idSpecies : Int = ParseData().getIdSpecies(download.get())
-        Log.d("baophuc",idSpecies.toString() + " 00000000000000")
+        idSpecies = ParseData().getIdSpecies(download.get())
 
         when (idSpecies) {
             1 -> getDataStory(species,0)
@@ -46,6 +68,7 @@ class CategoryPresenter (private var categoryView: CategoryView, private var con
                 if (listImage.size > 0) {
                     categoryView.updateCategoryImage(listImage)
                 }
+                isLoaded = false
             }
 
         })
@@ -68,6 +91,7 @@ class CategoryPresenter (private var categoryView: CategoryView, private var con
                 if (listStory.size > 0) {
                     categoryView.updateCategoryStory(listStory)
                 }
+                isLoaded = false
             }
 
         })

@@ -16,52 +16,46 @@ import kotlinx.android.synthetic.main.activity_category.*
 
 class CategoryActivity : AppCompatActivity(), CategoryView, DownloadInterface{
 
-    private var species : String = ""
     private lateinit var logic : CategoryPresenter
     private lateinit var adapterCategoryStory : AdapterCategoryStory
     private lateinit var adapterCategoryImage : AdapterCategoryImage
     private var listStory : ArrayList<CategoryStory> = ArrayList()
     private var listImage : ArrayList<CategoryImage> = ArrayList()
+    private lateinit var layoutManager : RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
+        var species = ""
         if (intent.getStringExtra(Constants.SPECIES_CHILD_MENU) != null) {
             species = intent.getStringExtra(Constants.SPECIES_CHILD_MENU)
         }
         logic = CategoryPresenter(this,this,this)
         logic.logicCheckSpecies(species)
-        val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this)
+        layoutManager = LinearLayoutManager(this)
         recyclerCatetory.layoutManager = layoutManager
         adapterCategoryStory = AdapterCategoryStory(this, listStory)
         adapterCategoryImage = AdapterCategoryImage(this,listImage)
 
-        loadDataStory()
-    }
-
-    private fun loadDataStory() {
         recyclerCatetory.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
+                val totalItem = layoutManager.itemCount
+                val seemItem = (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                logic.logicLoadMore(totalItem,seemItem,species)
             }
         })
     }
 
     override fun updateCategoryStory(listCategoryStory: ArrayList<CategoryStory>) {
         recyclerCatetory.adapter = adapterCategoryStory
-        listStory.clear()
         listStory.addAll(listCategoryStory)
         adapterCategoryStory.notifyDataSetChanged()
     }
 
     override fun updateCategoryImage(listCategoryImage: ArrayList<CategoryImage>) {
         recyclerCatetory.adapter = adapterCategoryImage
-        listImage.clear()
         listImage.addAll(listCategoryImage)
         adapterCategoryImage.notifyDataSetChanged()
     }

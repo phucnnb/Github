@@ -1,14 +1,18 @@
 package com.example.loicuabac2.view.category.AdapterCategory
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.loicuabac2.Constants
 import com.example.loicuabac2.R
 import com.example.loicuabac2.entity.CategoryStory
+import com.example.loicuabac2.view.readstory.ReadStoryActivity
 
 class AdapterCategoryStory (private var context: Context?, private var storys: ArrayList<CategoryStory>?):
                     RecyclerView.Adapter<AdapterCategoryStory.CategoryHolder>(){
@@ -25,7 +29,16 @@ class AdapterCategoryStory (private var context: Context?, private var storys: A
 
     override fun onBindViewHolder(p0 : CategoryHolder, p1 : Int) {
         val storyCategory = storys?.get(p1)
-        p0.txtStory.text = storyCategory!!.tentruyen
+        p0.txtStory.text = storyCategory!!.nameStory
+
+        p0.cardStory.setOnClickListener {
+            val intent = Intent(context,ReadStoryActivity::class.java)
+            Log.d("baophuc", storyCategory.linkStory + " " + storyCategory.nameStory + " " + storyCategory.idStory)
+            intent.putExtra(Constants.NAME_STORY, storyCategory.nameStory)
+            intent.putExtra(Constants.URL_STORY, storyCategory.linkStory)
+            intent.putExtra(Constants.ID_STORY, storyCategory.idStory)
+            context?.startActivity(intent)
+        }
     }
 
     class CategoryHolder

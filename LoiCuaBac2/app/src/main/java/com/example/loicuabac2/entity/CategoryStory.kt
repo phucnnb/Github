@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class CategoryStory (
     @SerializedName("tentruyen")
-    var tentruyen: String,
+    var nameStory: String,
 
     @SerializedName("linktruyen")
-    var linktruyen: String,
+    var linkStory: String,
 
     @SerializedName("id")
-    var id: String
+    var idStory: String
 )

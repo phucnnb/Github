@@ -54,10 +54,11 @@ class DownloadData (private var downloadInterface : DownloadInterface, private v
             val bufferedReader : BufferedReader = BufferedReader(inputStreamReader)
 
             val stringBuilder = StringBuilder()
-            val line =  bufferedReader.readLine()
+            var line =  bufferedReader.readLine()
 
-            if (line != null) {
+            while (line != null) {
                 stringBuilder.append(line + "\n")
+                line =  bufferedReader.readLine()
             }
 
             data = stringBuilder.toString()

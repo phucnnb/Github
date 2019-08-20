@@ -8,5 +8,12 @@ class Constants {
         //link web
         const val URL_SERVER = "http://ebook.xsolution.vn/loicuabac/"
         const val URL_SPECIES = "http://ebook.xsolution.vn/loicuabac/php/phanloai.php?tenchildmenu="
+
+        //key intent
+        const val NAME_STORY = "NAMESTORY"
+        const val URL_STORY = "URLSTORY"
+        const val ID_STORY = "IDSTORY"
+
+
     }
 }
