@@ -1,44 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@drawable/custom_setting_fragment"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
     >
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="hjhjhj"
+                android:text="@string/text_background"
+                android:textSize="18sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="16dp"
-        />
+                android:layout_marginStart="16dp" />
+
+        <Button
+                android:id="@+id/backGroundBlack"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_black"
+                android:textColor="#ffffff"
+                android:text="A"/>
+
+        <Button
+                android:id="@+id/backGroundPink"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/backGroundBlack"
+                android:layout_marginEnd="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_pink"
+                android:textColor="#1F1B3B"
+                android:text="A"/>
+
+        <Button
+                android:id="@+id/backGroundWhite"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/backGroundPink"
+                android:layout_marginEnd="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_white"
+                android:textColor="#1F1B3B"
+                android:text="A"/>
+        
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="40dp">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="hjhjhj"
+                android:textSize="18sp"
+                android:text="@string/text_size"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="16dp"
+                android:id="@+id/textView"/>
+
+        <android.support.v7.widget.AppCompatSeekBar
+                android:id="@+id/sbZoom"
+                android:layout_width="206dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:max="4"
+                android:progress="1"
         />
     </android.support.constraint.ConstraintLayout>
 

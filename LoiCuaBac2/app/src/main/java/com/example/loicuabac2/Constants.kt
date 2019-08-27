@@ -14,6 +14,13 @@ class Constants {
         const val URL_STORY = "URLSTORY"
         const val ID_STORY = "IDSTORY"
 
+        //Group Pref
+        const val BACK_GROUND = "BACKGROUND"
+
+        //Key Pref
+        const val COLOR_BACK_GROUND = "COLORBACKGROUND"
+        const val TEXT_SIZE = "TEXTSIZE"
+
 
     }
 }
