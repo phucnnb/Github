@@ -10,7 +10,7 @@
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="https://firebasestorage.googleapis.com/v0/b/testgoonews.appspot.com/o/DeepLink.html?alt=media&amp;token=4d823b99-9543-4f3c-ba92-f5ed54ab19ca"
+        android:text="レイアウトテスト"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
