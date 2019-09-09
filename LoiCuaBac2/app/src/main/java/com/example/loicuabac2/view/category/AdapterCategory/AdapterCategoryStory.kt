@@ -1,5 +1,6 @@
 package com.example.loicuabac2.view.category.AdapterCategory
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.CardView
@@ -37,6 +38,7 @@ class AdapterCategoryStory (private var context: Context?, private var storys: A
             intent.putExtra(Constants.NAME_STORY, storyCategory.nameStory)
             intent.putExtra(Constants.URL_STORY, storyCategory.linkStory)
             intent.putExtra(Constants.ID_STORY, storyCategory.idStory)
+            intent.putExtra(Constants.CHEKC_STORY_OFF, "online")
             context?.startActivity(intent)
         }
     }

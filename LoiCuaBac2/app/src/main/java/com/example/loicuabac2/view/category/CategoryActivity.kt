@@ -9,8 +9,10 @@ import com.example.loicuabac2.Constants
 import com.example.loicuabac2.R
 import com.example.loicuabac2.entity.CategoryImage
 import com.example.loicuabac2.entity.CategoryStory
+import com.example.loicuabac2.entity.CategoryStoryOffline
 import com.example.loicuabac2.service.download.DownloadInterface
 import com.example.loicuabac2.view.category.AdapterCategory.AdapterCategoryImage
+import com.example.loicuabac2.view.category.AdapterCategory.AdapterCategoryOffline
 import com.example.loicuabac2.view.category.AdapterCategory.AdapterCategoryStory
 import kotlinx.android.synthetic.main.activity_category.*
 
@@ -19,7 +21,9 @@ class CategoryActivity : AppCompatActivity(), CategoryView, DownloadInterface{
     private lateinit var logic : CategoryPresenter
     private lateinit var adapterCategoryStory : AdapterCategoryStory
     private lateinit var adapterCategoryImage : AdapterCategoryImage
+    private lateinit var adapterCategoryOffline: AdapterCategoryOffline
     private var listStory : ArrayList<CategoryStory> = ArrayList()
+    private var listStoryOffline : ArrayList<CategoryStoryOffline> = ArrayList()
     private var listImage : ArrayList<CategoryImage> = ArrayList()
     private lateinit var layoutManager : RecyclerView.LayoutManager
 
@@ -37,6 +41,7 @@ class CategoryActivity : AppCompatActivity(), CategoryView, DownloadInterface{
         recyclerCatetory.layoutManager = layoutManager
         adapterCategoryStory = AdapterCategoryStory(this, listStory)
         adapterCategoryImage = AdapterCategoryImage(this,listImage)
+        adapterCategoryOffline = AdapterCategoryOffline(this,listStoryOffline)
 
         recyclerCatetory.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -60,8 +65,20 @@ class CategoryActivity : AppCompatActivity(), CategoryView, DownloadInterface{
         adapterCategoryImage.notifyDataSetChanged()
     }
 
+    override fun updateCategoryStoryOffline(listCategoryOffline: List<CategoryStoryOffline>) {
+        recyclerCatetory.adapter = adapterCategoryOffline
+        listStoryOffline.addAll(listCategoryOffline)
+        adapterCategoryOffline.notifyDataSetChanged()
+    }
+
     override fun getStringFormUrl(s: String) {
         Log.d("baophuc",s)
+    }
+
+    override fun onBackPressed() {
+        finish()
+        Log.d("baophuc","Close")
+        super.onBackPressed()
     }
 }
 

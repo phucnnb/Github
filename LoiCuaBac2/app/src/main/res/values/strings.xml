@@ -13,4 +13,8 @@
     <string name="am_nhac">amnhac</string>
     <string name="text_size">Size</string>
     <string name="text_background">Background</string>
+
+    <string name="no_data">Chưa Tải Truyện</string>
+    <string name="had_data">Đã Tải Trước Đây</string>
+    <string name="download_done">Đã Tải Xong</string>
 </resources>

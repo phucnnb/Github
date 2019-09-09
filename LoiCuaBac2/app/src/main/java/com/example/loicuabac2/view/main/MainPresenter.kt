@@ -15,13 +15,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.example.loicuabac2.R
-import java.util.*
+import com.example.loicuabac2.entity.CategoryStoryOffline
+import com.example.loicuabac2.service.database.AppDatabase
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlin.collections.ArrayList
 
 
-class MainPresenter(private var viewMain: MainView) {
+class MainPresenter(private var viewMain: MainView, private var context: Context) {
 
-    fun  logicCheckInternet(context: Context){
+    fun  logicCheckInternet(){
         val connectionLiveData = ConnectionLiveData(context)
         connectionLiveData.observe(context as LifecycleOwner, object : Observer<ConnectionModel>{
             override fun onChanged(t: ConnectionModel?) {
@@ -41,7 +45,7 @@ class MainPresenter(private var viewMain: MainView) {
 
 
     fun logicPrepareDataMainMenu(){
-        var listMainMenu : ArrayList<MainMenu> = ArrayList()
+        var listMainMenu : ArrayList<MainMenu>
 
         val dataClient : DataClient = APIUtils.data.getData()
         val callMainMenu : Call<List<MainMenu>>  = dataClient.titleMenu()
@@ -66,7 +70,27 @@ class MainPresenter(private var viewMain: MainView) {
         val dataClient : DataClient = APIUtils.data.getData()
         when(id) {
             "5" -> Log.d("baophuc","Giới Thiệu")
-            "6" -> Log.d("baophuc","Offline")
+            "6" -> {
+                var check : List<CategoryStoryOffline>
+                Observable.fromCallable {
+                    check = AppDatabase.getInstance(context)?.categoryStoryOfflineDao()!!.checkData()
+                    if (check.size > 0) {
+                        viewMain.moveStoryOffline(true)
+                        Log.d("baophuc","true")
+                    } else {
+                        viewMain.moveStoryOffline(false)
+                        Log.d("baophuc","false")
+                    }
+                }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+
+                    },{
+                        Log.d("baophuc",it.toString())
+                    })
+
+            }
 
             else -> {
                 val callChildMenu : Call<List<ChildMenu>> = dataClient.childMenu(id)
@@ -88,94 +112,4 @@ class MainPresenter(private var viewMain: MainView) {
         }
 
     }
-
-//    fun logicPrepareDataMenu(listMainMenu: ArrayList<MainMenu>, listDataHeader: ArrayList<String>) {
-//
-//        val dataClient : DataClient = APIUtils.data.getData()
-//
-//        val listDataChild : HashMap<String, List<String>> = HashMap()
-//
-//
-//        for (c in 0 until listMainMenu.size){
-//            val callChildMenu : Call<List<ChildMenu>> = dataClient.childMenu(listMainMenu.get(c).id)
-//            callChildMenu.enqueue(object : Callback<List<ChildMenu>>{
-//                override fun onFailure(call: Call<List<ChildMenu>>, t: Throwable) {
-//                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//                }
-//
-//                override fun onResponse(call: Call<List<ChildMenu>>, response: Response<List<ChildMenu>>) {
-//                    listChildMenu = response.body() as ArrayList<ChildMenu>
-//                    val listChild : ArrayList<String> = ArrayList()
-//                    for (b in 0 until listChildMenu.size){
-//                        listChild.add(listChildMenu.get(b).child)
-//                    }
-//                    listDataChild[listDataHeader[c]] = listChild
-//                    if (c == (listMainMenu.size-1)){
-//                        //viewMain.prepareDataMenu(listDataHeader,listDataChild)
-//                    }
-//                }
-//            })
-//            try {
-//                Thread.sleep(50)
-//            } catch (e: InterruptedException) {
-//                e.printStackTrace()
-//            }
-//
-//        }
-//    }
-
-    /*fun logicPrepareDataMenu(){
-        val listDataHeader : ArrayList<String> = ArrayList()
-        val listDataChild : HashMap<String, List<String>> = HashMap()
-        val listChild : ArrayList<String> = ArrayList()
-
-        val dataClient : DataClient = APIUtils.data.getData()
-        val callMainMenu : Call<List<MainMenu>>  = dataClient.titleMenu()
-        callMainMenu.enqueue(object : Callback<List<MainMenu>> {
-            override fun onResponse(call: Call<List<MainMenu>>, response: Response<List<MainMenu>>) {
-                val listMainMenu : ArrayList<MainMenu> = response.body() as ArrayList<MainMenu>
-
-                if (listMainMenu.size > 0){
-                    for ( a in 0 until listMainMenu.size){
-                        listDataHeader.add(listMainMenu[a].tenMenu)
-
-                        var listChildMenu : ArrayList<ChildMenu> = ArrayList()
-                        val callChildMenu : Call<List<ChildMenu>> = dataClient.childMenu(listMainMenu[a].id)
-                        callChildMenu.enqueue(object : Callback<List<ChildMenu>>{
-                            override fun onResponse(call: Call<List<ChildMenu>>, response: Response<List<ChildMenu>>) {
-                                listChildMenu = response.body() as ArrayList<ChildMenu>
-                                for (b in 0 until listChildMenu.size){
-                                    listChild.add(listChildMenu[b].child)
-                                    if (b == (listChildMenu.size-1)){
-                                        Log.d("baophuc5", b.toString() + " ---- " + listChildMenu.size )
-                                        viewMain.prepareDataMenu(listDataHeader,listDataChild)
-                                        Log.d("baophuc4",listDataChild.toString())
-                                    }
-                                }
-                                listDataChild[listDataHeader[a]] = listChild
-                                listChild.clear()
-                                Log.d("baophuc3",listDataChild.toString())
-                            }
-                            override fun onFailure(call: Call<List<ChildMenu>>, t: Throwable) {
-                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                            }
-
-                        })
-                    }
-                    Log.d("baophuc1",listDataChild.toString())
-                }
-
-                Log.d("baophuc",listDataHeader.toString())
-                Log.d("baophuc2",listDataChild.toString())
-
-            }
-
-            override fun onFailure(call: Call<List<MainMenu>>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-        })
-
-
-    }*/
 }

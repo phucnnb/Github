@@ -1,5 +1,6 @@
 package com.example.loicuabac2.view.main
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
@@ -7,12 +8,14 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Toast
-import com.example.loicuabac2.R
+import com.example.loicuabac2.Constants
 import com.example.loicuabac2.entity.ChildMenu
 import com.example.loicuabac2.entity.MainMenu
+import com.example.loicuabac2.view.category.CategoryActivity
 import com.example.loicuabac2.view.main.adapter.ChildMenuAdapter
 import com.example.loicuabac2.view.main.adapter.MainMenuAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.OnClickMenu {
 
@@ -24,10 +27,10 @@ class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.OnClickMenu 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(com.example.loicuabac2.R.layout.activity_main)
 
-        logic = MainPresenter(this)
-        logic.logicCheckInternet(this)
+        logic = MainPresenter(this,this)
+        logic.logicCheckInternet()
         logic.logicPrepareDataMainMenu()
         setDrawerLayout()
         setChildMenu()
@@ -46,7 +49,7 @@ class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.OnClickMenu 
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = ""
 
-        val actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+        val actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, com.example.loicuabac2.R.string.open, com.example.loicuabac2.R.string.close)
         actionBarDrawerToggle.syncState()
         toolbar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
@@ -98,5 +101,15 @@ class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.OnClickMenu 
     override fun listenClickItem(id: String) {
         logic.logicPrepareDataChildMenu(id)
         drawerLayout.closeDrawer(GravityCompat.START)
+    }
+
+    override fun moveStoryOffline(check: Boolean) {
+        if(check) {
+            val intent = Intent(this,CategoryActivity::class.java)
+            intent.putExtra(Constants.SPECIES_CHILD_MENU,"3")
+            startActivity(intent)
+        } else {
+            runOnUiThread { Toast.makeText(applicationContext, com.example.loicuabac2.R.string.no_data, Toast.LENGTH_SHORT).show() }
+        }
     }
 }
