@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.widget.Toast
 import com.example.loicuabac2.Constants
 import com.example.loicuabac2.entity.ChildMenu
@@ -14,6 +15,7 @@ import com.example.loicuabac2.entity.MainMenu
 import com.example.loicuabac2.view.category.CategoryActivity
 import com.example.loicuabac2.view.main.adapter.ChildMenuAdapter
 import com.example.loicuabac2.view.main.adapter.MainMenuAdapter
+import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -92,6 +94,8 @@ class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.OnClickMenu 
     }
 
     override fun prepareDataChildMenu(listDataChildMenu: ArrayList<ChildMenu>) {
+        txtIntroduce.visibility = View.GONE
+        recyclerChildMenu.visibility = View.VISIBLE
         listChildMenu.clear()
         listChildMenu.addAll(listDataChildMenu)
 
@@ -111,5 +115,12 @@ class MainActivity : AppCompatActivity(), MainView, MainMenuAdapter.OnClickMenu 
         } else {
             runOnUiThread { Toast.makeText(applicationContext, com.example.loicuabac2.R.string.no_data, Toast.LENGTH_SHORT).show() }
         }
+    }
+
+    override fun getIntroduce() {
+        listChildMenu.clear()
+        adapterChildMenu.notifyDataSetChanged()
+        recyclerChildMenu.visibility = View.GONE
+        txtIntroduce.visibility = View.VISIBLE
     }
 }

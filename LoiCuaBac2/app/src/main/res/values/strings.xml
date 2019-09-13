@@ -17,4 +17,6 @@
     <string name="no_data">Chưa Tải Truyện</string>
     <string name="had_data">Đã Tải Trước Đây</string>
     <string name="download_done">Đã Tải Xong</string>
+    
+    <string name="introduce">&#160; &#160; &#160; Một phần mềm ứng dụng trên thiết bị di động, còn được gọi tắt là ứng dụng di động, hoặc chỉ ứng dụng, (tiếng Anh: Mobile app hoặc app) là phần mềm ứng dụng được thiết kế để chạy trên điện thoại thông minh, máy tính bảng và các thiết bị di động khác.</string>
 </resources>

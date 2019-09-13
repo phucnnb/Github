@@ -4,6 +4,7 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.util.Log
+import android.view.View
 import com.example.loicuabac2.entity.ChildMenu
 import com.example.loicuabac2.entity.ConnectionModel
 import com.example.loicuabac2.entity.MainMenu
@@ -20,6 +21,7 @@ import com.example.loicuabac2.service.database.AppDatabase
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.ArrayList
 
 
@@ -69,7 +71,9 @@ class MainPresenter(private var viewMain: MainView, private var context: Context
         var listChildMenu : ArrayList<ChildMenu>
         val dataClient : DataClient = APIUtils.data.getData()
         when(id) {
-            "5" -> Log.d("baophuc","Giới Thiệu")
+            "5" -> {
+                viewMain.getIntroduce()
+            }
             "6" -> {
                 var check : List<CategoryStoryOffline>
                 Observable.fromCallable {

@@ -8,5 +8,6 @@ interface MainView {
     fun prepareDataMainMenu(listDataMenu: ArrayList<MainMenu>)
     fun prepareDataChildMenu(listDataChildMenu: ArrayList<ChildMenu>)
     fun moveStoryOffline(check: Boolean)
+    fun getIntroduce()
 
 }
