@@ -26,7 +26,7 @@ class VocabularyFragment : Fragment() {
     private var x : Int = 0
     private val listData : ArrayList<Int> = ArrayList()
     private var vocabulary : Vocabulary? = null
-    private var sumItem = 28
+    private var sumItem = 55
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

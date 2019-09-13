@@ -199,6 +199,144 @@ class SearchVocabulary {
                     pronounce = "ku-mo"
                     typeface = "くも"
                 }
+
+                32 -> {
+                    vietnamese = "Ngọn Núi"
+                    pronounce = "ya-ma"
+                    typeface = "やま"
+                }
+
+                33 -> {
+                    vietnamese = "Tuyết"
+                    pronounce = "yu-ki"
+                    typeface = "ゆき"
+                }
+
+                34 -> {
+                    vietnamese = "Buổi Tối"
+                    pronounce = "yo-ru"
+                    typeface = "よる"
+                }
+
+                35 -> {
+                    vietnamese = "Hoa Anh Đào"
+                    pronounce = "sa-ku-ra"
+                    typeface = "さくら"
+                }
+
+                36 -> {
+                    vietnamese = "Cái Cân"
+                    pronounce = "ha-ka-ri"
+                    typeface = "はかり"
+                }
+
+                37 -> {
+                    vietnamese = "Con Khỉ"
+                    pronounce = "sa-ru"
+                    typeface = "さる"
+                }
+
+                38 -> {
+                    vietnamese = "Dòng Sông"
+                    pronounce = "ka-wa"
+                    typeface = "かわ"
+                }
+
+                39 -> {
+                    vietnamese = "Quạt Giấy"
+                    pronounce = "sen-su"
+                    typeface = "せんす"
+                }
+
+                40 -> {
+                    vietnamese = "Két Sắt"
+                    pronounce = "kin-ko"
+                    typeface = "きんこ"
+                }
+
+                41 -> {
+                    vietnamese = "Họa Sĩ"
+                    pronounce = "ga-ka"
+                    typeface = "がか"
+                }
+
+                42 -> {
+                    vietnamese = "Mắt Kính"
+                    pronounce = "me-ga-ne"
+                    typeface = "めがね"
+                }
+
+                43 -> {
+                    vietnamese = "Đồng Xu"
+                    pronounce = "gin-ka"
+                    typeface = "ぎんか"
+                }
+
+                44 -> {
+                    vietnamese = "Chìa Khóa"
+                    pronounce = "ka-gi"
+                    typeface = "かぎ"
+                }
+
+                45 -> {
+                    vietnamese = "Cơm"
+                    pronounce = "go-han"
+                    typeface = "ごはん"
+                }
+
+                46 -> {
+                    vietnamese = "Táo"
+                    pronounce = "rin-go"
+                    typeface = "りんご"
+                }
+
+                47 -> {
+                    vietnamese = "Núi Phú Sĩ"
+                    pronounce = "Fu-ji-san"
+                    typeface = "ふじさん"
+                }
+
+                48 -> {
+                    vietnamese = "Trái Cây"
+                    pronounce = "ku-da-mo-no"
+                    typeface = "くだもの"
+                }
+
+                49 -> {
+                    vietnamese = "Điện Thoại"
+                    pronounce = "den-wa"
+                    typeface = "でんわ"
+                }
+
+                50 -> {
+                    vietnamese = "Túi, Balo"
+                    pronounce = "ka-ban"
+                    typeface = "かばん"
+                }
+
+                51 -> {
+                    vietnamese = "Con Tôm"
+                    pronounce = "e-bi"
+                    typeface = "えび"
+                }
+
+                52 -> {
+                    vietnamese = "Bút Chì"
+                    pronounce = "en-pi-tsu"
+                    typeface = "えんぴつ"
+                }
+
+                53 -> {
+                    vietnamese = "Tờ Báo"
+                    pronounce = "shin-bun"
+                    typeface = "しんぶん"
+                }
+
+                54 -> {
+                    vietnamese = "Tem-pu-ra"
+                    pronounce = "ten-pu-ra"
+                    typeface = "てんぷら"
+                }
             }
 
             return Vocabulary(vietnamese,pronounce,typeface)
