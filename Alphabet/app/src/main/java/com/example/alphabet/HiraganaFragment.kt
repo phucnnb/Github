@@ -32,29 +32,6 @@ class HiraganaFragment : Fragment() {
         init(view)
         prepareDataRandom()
 
-       /* imageRandom.setOnClickListener {
-            imageRandom.setImageDrawable(null)
-            listData.clear()
-            tvPronounce.text = ""
-            btnRoll.text = "ROLL"
-            x = 0
-            count = 0
-            tvCount.text = "$count/46"
-            viewButton.visibility = View.GONE
-
-            if (!checkRandom) {
-                imageRandom.setBackgroundResource(R.drawable.random_off)
-                Toast.makeText(context,"Random Tắt",Toast.LENGTH_SHORT).show()
-                checkRandom = true
-                prepareData()
-            } else {
-                imageRandom.setBackgroundResource(R.drawable.random_on)
-                Toast.makeText(context,"Random Mở",Toast.LENGTH_SHORT).show()
-                checkRandom = false
-                prepareDataRandom()
-            }
-        }*/
-
         imageTypeFace.setOnClickListener {
             imageTypeFace.setImageDrawable(null)
             listData.clear()
@@ -83,7 +60,7 @@ class HiraganaFragment : Fragment() {
                 x = 0
                 count = 0
                 tvCount.text = "$count/46"
-                prepareData()
+                prepareDataRandom()
                 viewButton.visibility = View.GONE
             } else {
                 viewButton.visibility = View.VISIBLE
@@ -111,12 +88,6 @@ class HiraganaFragment : Fragment() {
             tvPronounce.text = word!!.typeface
         }
         return view
-    }
-
-    private fun prepareData() {
-        for (i in 0..45) {
-            listData.add(i)
-        }
     }
 
     private fun prepareDataRandom() {
