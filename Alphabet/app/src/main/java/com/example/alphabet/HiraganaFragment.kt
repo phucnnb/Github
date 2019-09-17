@@ -34,7 +34,6 @@ class HiraganaFragment : Fragment() {
 
         imageTypeFace.setOnClickListener {
             imageTypeFace.setImageDrawable(null)
-            listData.clear()
             tvPronounce.text = ""
             btnRoll.text = "ROLL"
             x = 0
@@ -91,6 +90,7 @@ class HiraganaFragment : Fragment() {
     }
 
     private fun prepareDataRandom() {
+        listData.clear()
         for (i in 0..45) {
             listData.add(i)
         }
