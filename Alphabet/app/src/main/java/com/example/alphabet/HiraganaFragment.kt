@@ -296,7 +296,6 @@ class HiraganaFragment : Fragment() {
                 typeFace = "ん"
             }
         }
-
         return  Word(pronounce,typeFace)
     }
 

@@ -1,5 +1,6 @@
 package com.example.alphabet
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -23,6 +24,7 @@ class KatakanaFragment : Fragment(){
     private val listData : ArrayList<Int> = ArrayList()
     private var word : Word? = null
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_katakana, container, false)
         init(view)
@@ -51,7 +53,7 @@ class KatakanaFragment : Fragment(){
         btnRollKata.setOnClickListener {
             if(btnRollKata.text == "RESET") {
                 tvPronounceKata.text = ""
-                btnRollKata.text = "ROLL"
+                btnRollKata.text = "ROL L"
                 x = 0
                 count = 0
                 tvCountKata.text = "$count/46"
@@ -275,7 +277,6 @@ class KatakanaFragment : Fragment(){
                 typeFace = "ン"
             }
         }
-
         return  Word(pronounce,typeFace)
     }
 
