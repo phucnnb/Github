@@ -3,7 +3,6 @@ package com.example.alphabet
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +64,6 @@ class HiraganaFragment : Fragment() {
                 viewButton.visibility = View.VISIBLE
                 x = listData[count]
                 word = getPronounce(x)
-                Log.d("baophuc",checkTypeFace.toString())
                 if (!checkTypeFace) {
                     tvPronounce.text = word!!.pronounce
                 } else {

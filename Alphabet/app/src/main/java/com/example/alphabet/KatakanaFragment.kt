@@ -3,7 +3,6 @@ package com.example.alphabet
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +52,7 @@ class KatakanaFragment : Fragment(){
         btnRollKata.setOnClickListener {
             if(btnRollKata.text == "RESET") {
                 tvPronounceKata.text = ""
-                btnRollKata.text = "ROL L"
+                btnRollKata.text = "ROLL"
                 x = 0
                 count = 0
                 tvCountKata.text = "$count/46"
@@ -63,7 +62,6 @@ class KatakanaFragment : Fragment(){
                 viewButtonKata.visibility = View.VISIBLE
                 x = listData[count]
                 word = getPronounce(x)
-                Log.d("baophuc",checkTypeFace.toString())
                 if (!checkTypeFace) {
                     tvPronounceKata.text = word!!.pronounce
                 } else {
