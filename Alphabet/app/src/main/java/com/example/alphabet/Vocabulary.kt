@@ -1,13 +1,14 @@
 package com.example.alphabet
 
-class Vocabulary {
-    var vietnamese : String
-    var pronounce : String
-    var typeface : String
+import com.google.gson.annotations.SerializedName
 
-    constructor(vietnamese: String, pronounce: String, typeface: String) {
-        this.vietnamese = vietnamese
-        this.pronounce = pronounce
-        this.typeface = typeface
-    }
-}
+data class Vocabulary (
+    @SerializedName("id")
+    var id : Int,
+    @SerializedName("vietnamese")
+    var vietnamese : String,
+    @SerializedName("pronounce")
+    var pronounce : String,
+    @SerializedName("typeface")
+    var typeface : String
+)

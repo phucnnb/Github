@@ -3,7 +3,7 @@ package com.example.alphabet
 class SearchVocabulary {
 
     companion object {
-        fun getVocabulary(id : Int) : Vocabulary {
+        fun getVocabulary(id : Int) {
             var vietnamese = ""
             var pronounce  = ""
             var typeface  = ""
@@ -113,7 +113,7 @@ class SearchVocabulary {
                 17 -> {
                     vietnamese = "Sợi Chỉ"
                     pronounce = "i-to"
-                    typeface = "い と"
+                    typeface = "いと"
                 }
 
                 18 -> {
@@ -338,8 +338,6 @@ class SearchVocabulary {
                     typeface = "てんぷら"
                 }
             }
-
-            return Vocabulary(vietnamese,pronounce,typeface)
         }
     }
 }

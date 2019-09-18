@@ -25,7 +25,7 @@ class KatakanaFragment : Fragment(){
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_katakana, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_katakana, container, false)
         init(view)
         prepareDataRandom()
 
@@ -67,7 +67,6 @@ class KatakanaFragment : Fragment(){
                 } else {
                     tvPronounceKata.text = word!!.typeface
                 }
-
                 tvCountKata.text = (count + 1).toString() + ("/46")
                 count++
             }
@@ -82,7 +81,6 @@ class KatakanaFragment : Fragment(){
         btnTypeFaceKata.setOnClickListener {
             tvPronounceKata.text = word!!.typeface
         }
-
         return view
     }
 

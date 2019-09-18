@@ -3,12 +3,19 @@ package com.example.alphabet
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import com.example.loicuabac2.service.retrofit.APIUtils
+import com.example.loicuabac2.service.retrofit.DataClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class VocabularyFragment : Fragment() {
 
@@ -25,15 +32,17 @@ class VocabularyFragment : Fragment() {
     private var x : Int = 0
     private val listData : ArrayList<Int> = ArrayList()
     private var vocabulary : Vocabulary? = null
-    private var sumItem = 55
+    private var sumItem = 0
+    private lateinit var listVocabulary : ArrayList<Vocabulary>
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_vocabulary, container, false)
 
         init(view)
-        tvCount.text = "0/$sumItem"
-        prepareData()
+
+        prepareDataRandom()
+
         btnRoll.setOnClickListener {
             tvPronounce.text = ""
             tvTypeFace.text = ""
@@ -43,14 +52,13 @@ class VocabularyFragment : Fragment() {
                 x = 0
                 count = 0
                 tvCount.text = "$count/$sumItem"
-                prepareData()
+                listVocabulary.shuffle()
                 viewButton1.visibility = View.GONE
                 viewButton2.visibility = View.GONE
             } else {
                 viewButton1.visibility = View.VISIBLE
                 viewButton2.visibility = View.VISIBLE
-                x = listData[count]
-                vocabulary = SearchVocabulary.getVocabulary(x)
+                vocabulary = listVocabulary[count]
                 tvVietnamese.text = vocabulary!!.vietnamese
                 tvCount.text = (count + 1).toString() + ("/$sumItem")
                 count++
@@ -78,6 +86,31 @@ class VocabularyFragment : Fragment() {
             listData.add(i)
         }
         listData.shuffle()
+    }
+
+    private fun prepareDataRandom() {
+
+        val dataClient : DataClient = APIUtils.data.getData()
+        val callVocabulary : Call<List<Vocabulary>> = dataClient.getVocabulary()
+
+        callVocabulary.enqueue(object : Callback<List<Vocabulary>> {
+            override fun onFailure(call: Call<List<Vocabulary>>, t: Throwable) {
+                Log.d("AAA",t.toString())
+            }
+
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(call: Call<List<Vocabulary>>, response: Response<List<Vocabulary>>) {
+                Log.d("baophuc",response.toString())
+                listVocabulary = response.body() as ArrayList<Vocabulary>
+
+                if (listVocabulary.size > 0) {
+                    listVocabulary.shuffle()
+                    sumItem = listVocabulary.size
+                    tvCount.text = "0/$sumItem"
+                }
+            }
+
+        })
     }
 
     private fun init(view: View?) {
