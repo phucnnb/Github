@@ -12,7 +12,6 @@ class KatakanaFragment : Fragment(){
 
     private var checkTypeFace : Boolean = false
     private lateinit var viewButtonKata: LinearLayout
-     
     private lateinit var imageTypeFaceKata : ImageView
     private lateinit var btnRollKata : Button
     private lateinit var tvCountKata : TextView
