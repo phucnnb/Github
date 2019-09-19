@@ -1,4 +1,4 @@
-package com.example.loicuabac2.service.retrofit
+package com.example.alphabet.retrofit
 
 
 import com.example.alphabet.Vocabulary

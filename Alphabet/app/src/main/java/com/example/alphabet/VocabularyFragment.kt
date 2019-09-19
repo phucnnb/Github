@@ -10,9 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import com.example.loicuabac2.service.retrofit.APIUtils
-import com.example.loicuabac2.service.retrofit.DataClient
+import com.example.alphabet.retrofit.APIUtils
+import com.example.alphabet.retrofit.DataClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +33,7 @@ class VocabularyFragment : Fragment() {
     private var vocabulary : Vocabulary? = null
     private var sumItem = 0
     private lateinit var listVocabulary : ArrayList<Vocabulary>
+    private var check : Boolean = false
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,28 +44,30 @@ class VocabularyFragment : Fragment() {
         prepareDataRandom()
 
         btnRoll.setOnClickListener {
-            tvPronounce.text = ""
-            tvTypeFace.text = ""
-            if(btnRoll.text == "RESET") {
-                tvVietnamese.text = ""
-                btnRoll.text = "ROLL"
-                x = 0
-                count = 0
-                tvCount.text = "$count/$sumItem"
-                listVocabulary.shuffle()
-                viewButton1.visibility = View.GONE
-                viewButton2.visibility = View.GONE
-            } else {
-                viewButton1.visibility = View.VISIBLE
-                viewButton2.visibility = View.VISIBLE
-                vocabulary = listVocabulary[count]
-                tvVietnamese.text = vocabulary!!.vietnamese
-                tvCount.text = (count + 1).toString() + ("/$sumItem")
-                count++
-            }
+            if (check) {
+                tvPronounce.text = ""
+                tvTypeFace.text = ""
+                if(btnRoll.text == "RESET") {
+                    tvVietnamese.text = ""
+                    btnRoll.text = "ROLL"
+                    x = 0
+                    count = 0
+                    tvCount.text = "$count/$sumItem"
+                    listVocabulary.shuffle()
+                    viewButton1.visibility = View.GONE
+                    viewButton2.visibility = View.GONE
+                } else {
+                    viewButton1.visibility = View.VISIBLE
+                    viewButton2.visibility = View.VISIBLE
+                    vocabulary = listVocabulary[count]
+                    tvVietnamese.text = vocabulary!!.vietnamese
+                    tvCount.text = (count + 1).toString() + ("/$sumItem")
+                    count++
+                }
 
-            if(count == sumItem) {
-                btnRoll.text = "RESET"
+                if(count == sumItem) {
+                    btnRoll.text = "RESET"
+                }
             }
         }
 
@@ -107,6 +109,7 @@ class VocabularyFragment : Fragment() {
                     listVocabulary.shuffle()
                     sumItem = listVocabulary.size
                     tvCount.text = "0/$sumItem"
+                    check = true
                 }
             }
 
